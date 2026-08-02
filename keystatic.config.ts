@@ -18,7 +18,7 @@ export default config({
         heroImage: fields.image({ label: 'Hero image', directory: 'public/images/posts' }),
         tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags', itemLabel: (props) => props.value }),
         draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
-        content: fields.markdown({ label: 'Content' }),
+        content: fields.markdoc({ label: 'Content', extension: 'md' }),
       },
     }),
   },
