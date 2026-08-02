@@ -1,0 +1,40 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  date: string;
+  image?: string;
+  tags?: string[];
+  slug: string;
+  readTime?: string;
+}
+
+const { title, description, date, image, tags, slug, readTime = '3 minutes read' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<article class="card article-card">
+  <a href={`${base}notes/${slug}`}>
+    <div class="card-image">
+      <div class="post-info"> 
+        <span class="text-uppercase">{date}</span>
+        <span class="text-uppercase">{readTime}</span>
+      </div>
+      <img loading="lazy" decoding="async" src={image || `${base}images/post/post-1.jpg`} alt="Post Thumbnail" class="w-100">
+    </div>
+  </a>
+  <div class="card-body px-0 pb-1">
+    {tags && tags.length > 0 && (
+      <ul class="post-meta mb-2">
+        <li>
+          {tags.map(tag => (
+            <a href={`${base}notes?tag=${tag}`}>{tag}</a>
+          ))}
+        </li>
+      </ul>
+    )}
+    <h2 class="h1"><a class="post-title" href={`${base}notes/${slug}`}>{title}</a></h2>
+    {description && <p class="card-text">{description}</p>}
+    <div class="content"> <a class="read-more-btn" href={`${base}notes/${slug}`}>Read Full Article</a></div>
+  </div>
+</article>

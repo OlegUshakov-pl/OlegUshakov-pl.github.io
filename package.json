@@ -1,0 +1,21 @@
+{
+  "name": "blog-oleg-ushakov",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "concurrently \"node scripts/git-commit-server.mjs\" \"astro dev\"",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.0.3",
+    "@astrojs/react": "^6.0.2",
+    "astro": "latest"
+  },
+  "devDependencies": {
+    "@keystatic/astro": "^5.2.0",
+    "@keystatic/core": "^0.6.4",
+    "concurrently": "^10.0.4"
+  }
+}

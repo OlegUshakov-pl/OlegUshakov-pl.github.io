@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import Sidebar from '../components/Sidebar.astro';
+
+const posts = [
+  {
+    title: 'Is it Ethical to Travel Now? With that Freedom Comes Responsibility.',
+    description: 'Heading Here is example of hedings. You can use this heading by following markdownify rules.',
+    date: '04 Jun 2021',
+    image: 'images/post/post-1.jpg',
+    tags: ['travel', 'news'],
+    slug: 'is-it-ethical-to-travel-now',
+    readTime: '3 minutes read'
+  },
+  {
+    title: 'An Experiential Guide to Explore This Kingdom',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna …',
+    date: '03 Jun 2021',
+    image: 'images/post/post-2.jpg',
+    tags: ['travel'],
+    slug: 'experiential-guide-explore-kingdom',
+    readTime: '2 minutes read'
+  },
+  {
+    title: 'What to Do in Houston: Ideas for Your Visit',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna …',
+    date: '02 Jun 2021',
+    image: 'images/post/ls-2.jpg',
+    tags: ['lifestyle'],
+    slug: 'what-to-do-in-houston',
+    readTime: '2 minutes read'
+  },
+  {
+    title: 'Alaska Cruises Will Restart as Biden Signs New Tourism Law',
+    description: 'Heading Here is example of hedings. You can use this heading by following markdownify rules.',
+    date: '01 Jun 2021',
+    image: 'images/post/cr-1.jpg',
+    tags: ['cruises', 'news'],
+    slug: 'alaska-cruises-restart',
+    readTime: '3 minutes read'
+  },
+  {
+    title: 'U.S. Travel Association Calls on CDC to Remove Cruise Restrictions',
+    description: 'Heading Here is example of hedings. You can use this heading by following markdownify rules.',
+    date: '30 May 2021',
+    image: 'images/post/cr-2.jpg',
+    tags: ['cruises', 'news'],
+    slug: 'us-travel-association-cdc-cruise',
+    readTime: '3 minutes read'
+  },
+  {
+    title: 'Top 7 Reasons to Visit Denver This Summer',
+    description: 'Heading Here is example of hedings. You can use this heading by following markdownify rules.',
+    date: '29 May 2021',
+    image: 'images/post/post-4.jpg',
+    tags: ['destination'],
+    slug: 'top-7-reasons-visit-denver',
+    readTime: '3 minutes read'
+  },
+  {
+    title: 'An Experiential Guide to Explore This Kingdom',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna …',
+    date: '28 May 2021',
+    image: 'images/post/post-8.jpg',
+    tags: ['news', 'tips'],
+    slug: 'experiential-guide-kingdom-2',
+    readTime: '2 minutes read'
+  }
+];
+---
+
+<BaseLayout title="Reporter - HTML Blog Template">
+  <section class="section">
+    <div class="container">
+      <div class="row no-gutters-lg">
+        <div class="col-12">
+          <h2 class="section-title">Latest Articles</h2>
+        </div>
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <div class="row">
+            {posts.map((post, index) => (
+              <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>
+                <PostCard
+                  title={post.title}
+                  description={post.description}
+                  date={post.date}
+                  image={post.image}
+                  tags={post.tags}
+                  slug={post.slug}
+                  readTime={post.readTime}
+                />
+              </div>
+            ))}
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12">
+                  <nav class="mt-4">
+                    <nav class="mb-md-50">
+                      <ul class="pagination justify-content-center">
+                        <li class="page-item">
+                          <a class="page-link" href="#!" aria-label="Pagination Arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+                            </svg>
+                          </a>
+                        </li>
+                        <li class="page-item active"> <a href="#" class="page-link">1</a></li>
+                        <li class="page-item"> <a href="#!" class="page-link">2</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#!" aria-label="Pagination Arrow">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" viewBox="0 0 16 16">
+                              <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+                            </svg>
+                          </a>
+                        </li>
+                      </ul>
+                    </nav>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <Sidebar />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

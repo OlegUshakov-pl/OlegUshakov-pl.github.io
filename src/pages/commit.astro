@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Only render in dev mode - redirect in production
+if (!import.meta.env.DEV) {
+  return Astro.redirect('/');
+}
+
+export const prerender = false;
+---
+
+<BaseLayout title="Commit & Push - Reporter Blog">
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1 class="mb-4">Commit & Push</h1>
+          <div class="content">
+            <p>Use this page to commit and push your changes to the repository.</p>
+            
+            <form id="commit-form" class="mt-4">
+              <div class="form-group mb-3">
+                <label for="commit-message" class="form-label">Commit Message</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  id="commit-message" 
+                  name="message" 
+                  placeholder="Enter commit message..."
+                  required
+                >
+              </div>
+              <button type="submit" class="btn btn-primary" id="submit-btn">
+                Commit & Push
+              </button>
+            </form>
+            
+            <div id="result" class="mt-4" style="display: none;">
+              <div id="result-message"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('commit-form') as HTMLFormElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const resultDiv = document.getElementById('result') as HTMLDivElement;
+  const resultMessage = document.getElementById('result-message') as HTMLDivElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const messageInput = document.getElementById('commit-message') as HTMLInputElement;
+    const message = messageInput?.value.trim();
+    
+    if (!message) {
+      showResult('Please enter a commit message.', false);
+      return;
+    }
+    
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Processing...';
+    
+    try {
+      const response = await fetch('http://127.0.0.1:4001/commit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.ok) {
+        if (data.changed) {
+          showResult('Changes committed and pushed successfully!', true);
+          messageInput.value = '';
+        } else {
+          showResult('No changes to commit.', false);
+        }
+      } else {
+        showResult(`Error: ${data.error}`, false);
+      }
+    } catch (error) {
+      showResult('Failed to connect to git server. Make sure it\'s running.', false);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Commit & Push';
+    }
+  });
+
+  function showResult(message: string, success: boolean) {
+    resultDiv.style.display = 'block';
+    resultMessage.textContent = message;
+    resultMessage.className = success ? 'alert alert-success' : 'alert alert-danger';
+  }
+</script>

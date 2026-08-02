@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="Notes - Reporter Blog">
+  <section class="section">
+    <div class="container">
+      <div class="row no-gutters-lg">
+        <div class="col-12">
+          <h2 class="section-title">Latest Articles</h2>
+        </div>
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <div class="row">
+            {posts.map((post, index) => (
+              <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>
+                <PostCard
+                  title={post.data.title}
+                  description={post.data.description}
+                  date={post.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  image={post.data.heroImage}
+                  tags={post.data.tags}
+                  slug={post.id}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <Sidebar />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
