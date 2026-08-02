@@ -15,7 +15,7 @@ export default config({
         description: fields.text({ label: 'Description' }),
         pubDate: fields.date({ label: 'Publish date' }),
         updatedDate: fields.date({ label: 'Updated date' }),
-        heroImage: fields.image({ label: 'Hero image', directory: 'public/images/posts' }),
+        heroImage: fields.text({ label: 'Hero image', description: 'Path to image, e.g. /images/post/post-1.jpg' }),
         tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags', itemLabel: (props) => props.value }),
         draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
         content: fields.markdoc({ label: 'Content', extension: 'md' }),
