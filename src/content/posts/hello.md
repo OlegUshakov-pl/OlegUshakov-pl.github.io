@@ -3,7 +3,7 @@ title: Hello
 description: lorem ipsum dolor sit amet consectetur adipiscing.
 pubDate: 2026-08-02
 updatedDate: 2026-08-02
-heroImage: heroImage.jpg
+heroImage: /images/post/post-1.jpg
 tags:
   - tom
 draft: false
