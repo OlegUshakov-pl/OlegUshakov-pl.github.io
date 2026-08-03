@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
+import Sidebar from '../components/Sidebar.astro';
 
 const posts = [
   {
@@ -32,8 +33,9 @@ const posts = [
           <h2 class="section-title">Latest Articles</h2>
         </div>
 
-        <!-- Categories — слева -->
+        <!-- Sidebar + Categories — слева -->
         <div class="col-lg-4">
+          <Sidebar />
           <div class="widget">
             <h2 class="section-title mb-3">Categories</h2>
             <div class="widget-body">
@@ -50,23 +52,8 @@ const posts = [
           </div>
         </div>
 
-        <!-- About Me + Articles — справа -->
+        <!-- Articles — справа -->
         <div class="col-lg-8 mb-5 mb-lg-0">
-          <!-- About Me -->
-          <div class="col-12">
-            <h2 class="section-title">About me</h2>
-          </div>
-          <p class="mb-5">
-            Mechanical design engineer with 20+ years professional experience with a
-            solid background in machine design, tools, fixtures, dies, special machinery.
-            Providing technology of manufacturing mechanical parts. Calculations of
-            mechanical parts, FEA analysys. Detailed manufacturing drawings and general
-            bill of materials.
-          </p>
-
-          <div class="col-12">
-            <h2 class="section-title">Latest Articles</h2>
-          </div>
           <div class="row">
             {posts.map((post, index) => (
               <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>

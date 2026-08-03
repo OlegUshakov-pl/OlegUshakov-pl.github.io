@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import Sidebar from '../../components/Sidebar.astro';
 import { getCollection } from 'astro:content';
-
-const base = import.meta.env.BASE_URL;
 
 const posts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
@@ -18,8 +17,9 @@ const posts = (await getCollection('posts'))
           <h2 class="section-title">Latest Articles</h2>
         </div>
 
-        <!-- Categories — слева -->
+        <!-- Sidebar + Categories — слева -->
         <div class="col-lg-4">
+          <Sidebar />
           <div class="widget">
             <h2 class="section-title mb-3">Categories</h2>
             <div class="widget-body">
@@ -36,28 +36,8 @@ const posts = (await getCollection('posts'))
           </div>
         </div>
 
-        <!-- About Me + Articles — справа -->
+        <!-- Articles — справа -->
         <div class="col-lg-8 mb-5 mb-lg-0">
-          <!-- About Me -->
-          <div class="widget mb-4">
-            <div class="widget-body">
-              <img
-                loading="lazy"
-                decoding="async"
-                src={`${base}images/sonic.jpg`}
-                alt="About Me"
-                class="w-100 author-thumb-sm d-block"
-              />
-              <h2 class="widget-title my-3">Oleg Ushakov</h2>
-              <p class="mb-3 pb-2">Mechanical design engineer / Developer</p>
-              <p><a href="https://x.com/Olek123zip">@Olek123zip</a></p>
-              <p><a href="https://x.com/olek_tam">@olek_tam</a></p>
-              <p><a href="https://www.linkedin.com/in/oleg-ushakov-29212829/">Linkedin</a></p>
-              <a href={`${base}about`} class="btn btn-sm btn-outline-primary">Know More</a>
-            </div>
-          </div>
-
-          <!-- Articles -->
           <div class="row">
             {posts.map((post, index) => (
               <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>
