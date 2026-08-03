@@ -13,9 +13,6 @@ const posts = (await getCollection('posts'))
   <section class="section">
     <div class="container">
       <div class="row no-gutters-lg">
-        <div class="col-12">
-          <h2 class="section-title">Latest Articles</h2>
-        </div>
 
         <!-- Sidebar + Categories — слева -->
         <div class="col-lg-4">
@@ -36,8 +33,15 @@ const posts = (await getCollection('posts'))
           </div>
         </div>
 
-        <!-- Articles — справа -->
+        <!-- About me + Articles — справа -->
         <div class="col-lg-8 mb-5 mb-lg-0">
+          <h2 class="section-title">About me</h2>
+          <p class="mb-4">
+            Mechanical design engineer with 20+ years professional experience with a
+            solid background in machine design, tools, fixtures, dies, special machinery.
+            Providing technology of manufacturing mechanical parts.
+          </p>
+          <h2 class="section-title">Latest Articles</h2>
           <div class="row">
             {posts.map((post, index) => (
               <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>
