@@ -1,130 +1,90 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PostCard from "../components/PostCard.astro";
-import Sidebar from "../components/Sidebar.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
 
 const posts = [
-    {
-        title: "Is it Ethical to Travel Now? With that Freedom Comes Responsibility.",
-        description:
-            "Heading Here is example of hedings. You can use this heading by following markdownify rules.",
-        date: "04 Jun 2021",
-        image: "images/post/post-1.jpg",
-        tags: ["travel", "news"],
-        slug: "is-it-ethical-to-travel-now",
-        readTime: "3 minutes read",
-    },
-    {
-        title: "An Experiential Guide to Explore This Kingdom",
-        description:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna …",
-        date: "03 Jun 2021",
-        image: "images/post/post-2.jpg",
-        tags: ["travel"],
-        slug: "experiential-guide-explore-kingdom",
-        readTime: "2 minutes read",
-    },
+  {
+    title: 'Is it Ethical to Travel Now? With that Freedom Comes Responsibility.',
+    description: 'Heading Here is example of hedings. You can use this heading by following markdownify rules.',
+    date: '04 Jun 2021',
+    image: 'images/post/post-1.jpg',
+    tags: ['travel', 'news'],
+    slug: 'is-it-ethical-to-travel-now',
+    readTime: '3 minutes read'
+  },
+  {
+    title: 'An Experiential Guide to Explore This Kingdom',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna …',
+    date: '03 Jun 2021',
+    image: 'images/post/post-2.jpg',
+    tags: ['travel'],
+    slug: 'experiential-guide-explore-kingdom',
+    readTime: '2 minutes read'
+  },
 ];
 ---
 
 <BaseLayout title="Reporter - HTML Blog Template">
-    <section class="section">
-        <div class="container">
-            <div class="row no-gutters-lg">
-                <div class="col-lg-8 mb-5 mb-lg-0">
-                    <div class="col-12">
-                        <h2 class="section-title">About me</h2>
-                    </div>
-                    <p class="mb-5">
-                        Mechanical design engineer with 20+ years professional experience with a
-                        solid background in machine design,tools, fixtures, dies, special machinery.
-                        Providing technology of manufacturing mechanical parts. Calculations of
-                        mechanical parts, FEA analysys. Detailed manufacturing drawings and general
-                        bill of materials.
-                    </p>
-                    <div class="col-12">
-                        <h2 class="section-title">Latest Articles</h2>
-                    </div>
-                    <div class="row">
-                        {
-                            posts.map((post, index) => (
-                                <div class={index === 0 ? "col-12 mb-4" : "col-md-6 mb-4"}>
-                                    <PostCard
-                                        title={post.title}
-                                        description={post.description}
-                                        date={post.date}
-                                        image={post.image}
-                                        tags={post.tags}
-                                        slug={post.slug}
-                                        readTime={post.readTime}
-                                    />
-                                </div>
-                            ))
-                        }
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-12">
-                                    <nav class="mt-4">
-                                        <nav class="mb-md-50">
-                                            <ul class="pagination justify-content-center">
-                                                <li class="page-item">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#!"
-                                                        aria-label="Pagination Arrow"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="26"
-                                                            height="26"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 16 16"
-                                                        >
-                                                            <path
-                                                                fill-rule="evenodd"
-                                                                d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"
-                                                            ></path>
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item active">
-                                                    <a href="#" class="page-link">1</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a href="#!" class="page-link">2</a>
-                                                </li>
-                                                <li class="page-item">
-                                                    <a
-                                                        class="page-link"
-                                                        href="#!"
-                                                        aria-label="Pagination Arrow"
-                                                    >
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="26"
-                                                            height="26"
-                                                            fill="currentColor"
-                                                            viewBox="0 0 16 16"
-                                                        >
-                                                            <path
-                                                                fill-rule="evenodd"
-                                                                d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"
-                                                            ></path>
-                                                        </svg>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <Sidebar />
-                </div>
-            </div>
+  <section class="section">
+    <div class="container">
+      <div class="row no-gutters-lg">
+        <div class="col-12">
+          <h2 class="section-title">Latest Articles</h2>
         </div>
-    </section>
+
+        <!-- Categories — слева -->
+        <div class="col-lg-4">
+          <div class="widget">
+            <h2 class="section-title mb-3">Categories</h2>
+            <div class="widget-body">
+              <ul class="widget-list">
+                <li><a href="#!">computer<span class="ml-auto">(3)</span></a></li>
+                <li><a href="#!">cruises<span class="ml-auto">(2)</span></a></li>
+                <li><a href="#!">destination<span class="ml-auto">(1)</span></a></li>
+                <li><a href="#!">lifestyle<span class="ml-auto">(2)</span></a></li>
+                <li><a href="#!">news<span class="ml-auto">(5)</span></a></li>
+                <li><a href="#!">tips<span class="ml-auto">(1)</span></a></li>
+                <li><a href="#!">travel<span class="ml-auto">(3)</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Me + Articles — справа -->
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <!-- About Me -->
+          <div class="col-12">
+            <h2 class="section-title">About me</h2>
+          </div>
+          <p class="mb-5">
+            Mechanical design engineer with 20+ years professional experience with a
+            solid background in machine design, tools, fixtures, dies, special machinery.
+            Providing technology of manufacturing mechanical parts. Calculations of
+            mechanical parts, FEA analysys. Detailed manufacturing drawings and general
+            bill of materials.
+          </p>
+
+          <div class="col-12">
+            <h2 class="section-title">Latest Articles</h2>
+          </div>
+          <div class="row">
+            {posts.map((post, index) => (
+              <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>
+                <PostCard
+                  title={post.title}
+                  description={post.description}
+                  date={post.date}
+                  image={post.image}
+                  tags={post.tags}
+                  slug={post.slug}
+                  readTime={post.readTime}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 </BaseLayout>
