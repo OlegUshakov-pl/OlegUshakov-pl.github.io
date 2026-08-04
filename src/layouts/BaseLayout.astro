@@ -24,74 +24,133 @@ const base = import.meta.env.BASE_URL;
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&family=Work+Sans:wght@400;500;600;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
             rel="stylesheet"
         />
 
-        <link rel="stylesheet" href={`${base}plugins/bootstrap/bootstrap.min.css`} />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: ['Montserrat', 'sans-serif'],
+                        },
+                        colors: {
+                            primary: '#13AE6F',
+                            dark: '#131313',
+                        },
+                    },
+                },
+            }
+        </script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
         <link rel="stylesheet" href={`${base}css/style.css`} />
         <script src="https://unpkg.com/lucide@latest"></script>
     </head>
-    <body>
-        <header class="navigation">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light px-0">
-                    <a class="navbar-brand order-1 py-0" href={`${base}`}>
+    <body class="font-sans text-gray-700 bg-white leading-relaxed antialiased">
+        <header>
+            <div class="max-w-6xl mx-auto px-4 sm:px-6">
+                <nav class="flex items-center justify-between py-6" x-data="{ open: false, dropdown: false }">
+                    <a class="order-1" href={`${base}`}>
                         <img
                             loading="prelaod"
                             decoding="async"
-                            class="img-fluid"
+                            class="h-auto"
                             src={`${base}images/logo.png`}
                             alt="Reporter Hugo"
                         />
                     </a>
-                    <div class="navbar-actions order-3 ml-0 ml-md-4">
+
+                    <div class="order-3 ml-4 lg:hidden">
                         <button
                             aria-label="navbar toggler"
-                            class="navbar-toggler border-0"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navigation"
+                            class="text-2xl"
+                            @click="open = !open"
                         >
-                            <span class="navbar-toggler-icon"></span>
+                            <span x-show="!open"><i data-lucide="menu"></i></span>
+                            <span x-show="open"><i data-lucide="x"></i></span>
                         </button>
                     </div>
-                    <form action="#!" class="search order-lg-3 order-md-2 order-3 ml-auto">
+
+                    <form action="#!" class="hidden lg:block lg:ml-auto lg:order-3">
                         <input
                             id="search-query"
                             name="s"
                             type="search"
                             placeholder="Search..."
                             autocomplete="off"
+                            class="border border-gray-300 px-4 py-2.5 w-full max-w-[250px] text-sm focus:outline-none focus:border-dark"
                         />
                     </form>
+
                     <div
-                        class="collapse navbar-collapse text-center order-lg-2 order-4"
-                        id="navigation"
+                        class="hidden lg:flex lg:items-center lg:order-2 lg:ml-auto"
                     >
-                        <ul class="navbar-nav mx-auto mt-3 mt-lg-0">
-                            <li class="nav-item">
-                                <a class="nav-link" href={`${base}about`}>About Me</a>
+                        <ul class="flex items-center gap-6">
+                            <li>
+                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}about`}>About Me</a>
                             </li>
-                            <li class="nav-item dropdown">
+                            <li class="relative" x-data="{ open: false }" @mouseenter="open = true" @mouseleave="open = false">
                                 <a
-                                    class="nav-link dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
+                                    class="text-sm font-medium capitalize hover:text-primary transition cursor-pointer flex items-center gap-1"
+                                    @click.prevent="open = !open"
                                 >
                                     Articles
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href={`${base}notes`}>Notes</a>
+                                <div
+                                    x-show="open"
+                                    x-transition:enter="transition ease-out duration-200"
+                                    x-transition:enter-start="opacity-0 translate-y-1"
+                                    x-transition:enter-end="opacity-100 translate-y-0"
+                                    x-transition:leave="transition ease-in duration-150"
+                                    x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 translate-y-1"
+                                    class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
+                                >
+                                    <a class="block px-4 py-2 text-sm font-medium hover:bg-gray-50 hover:text-primary" href={`${base}notes`}>Notes</a>
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href={`${base}contact`}>Contact</a>
+                            <li>
+                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}contact`}>Contact</a>
                             </li>
                         </ul>
+                    </div>
+
+                    <!-- Mobile menu -->
+                    <div
+                        x-show="open"
+                        x-transition:enter="transition ease-out duration-200"
+                        x-transition:enter-start="opacity-0 -translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0"
+                        x-transition:leave="transition ease-in duration-150"
+                        x-transition:leave-start="opacity-100 translate-y-0"
+                        x-transition:leave-end="opacity-0 -translate-y-2"
+                        class="absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg lg:hidden z-50"
+                    >
+                        <div class="max-w-6xl mx-auto px-4 py-4">
+                            <form action="#!" class="mb-4">
+                                <input
+                                    type="search"
+                                    placeholder="Search..."
+                                    autocomplete="off"
+                                    class="border border-gray-300 px-4 py-2.5 w-full text-sm focus:outline-none focus:border-dark"
+                                />
+                            </form>
+                            <ul class="flex flex-col gap-3">
+                                <li>
+                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}about`}>About Me</a>
+                                </li>
+                                <li>
+                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}notes`}>Articles</a>
+                                </li>
+                                <li>
+                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}contact`}>Contact</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -101,25 +160,25 @@ const base = import.meta.env.BASE_URL;
             <slot />
         </main>
 
-        <footer class="bg-dark mt-5">
-            <div class="container section">
-                <div class="row">
-                    <div class="col-lg-10 mx-auto text-center">
-                        <a class="d-inline-block mb-4 pb-2" href={`${base}`}>
+        <footer class="bg-dark mt-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+                <div class="flex justify-center">
+                    <div class="w-full lg:w-10/12 text-center">
+                        <a class="inline-block mb-4 pb-2" href={`${base}`}>
                             <img
                                 loading="prelaod"
                                 decoding="async"
-                                class="img-fluid"
+                                class="h-auto"
                                 src={`${base}images/logo-white.png`}
                                 alt="Reporter Hugo"
                             />
                         </a>
-                        <ul class="p-0 d-flex navbar-footer mb-0 list-unstyled">
-                            <li class="nav-item my-0">
-                                <a class="nav-link" href={`${base}about`}>About</a>
+                        <ul class="flex justify-center gap-6 p-0 m-0 list-none">
+                            <li>
+                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}about`}>About</a>
                             </li>
-                            <li class="nav-item my-0">
-                                <a class="nav-link" href={`${base}notes`}>Articles</a>
+                            <li>
+                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}notes`}>Articles</a>
                             </li>
                         </ul>
                     </div>
@@ -127,9 +186,6 @@ const base = import.meta.env.BASE_URL;
             </div>
         </footer>
 
-        <script src={`${base}plugins/jquery/jquery.min.js`}></script>
-        <script src={`${base}plugins/bootstrap/bootstrap.min.js`}></script>
-        <script src={`${base}js/script.js`}></script>
         <script>lucide.createIcons();</script>
     </body>
 </html>

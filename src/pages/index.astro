@@ -26,41 +26,41 @@ const posts = [
 ---
 
 <BaseLayout title="Reporter - HTML Blog Template">
-  <section class="section">
-    <div class="container">
-      <div class="row no-gutters-lg">
+  <section class="py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col lg:flex-row gap-8">
 
         <!-- Sidebar + Categories — слева -->
-        <div class="col-lg-4">
+        <div class="w-full lg:w-1/3">
           <Sidebar />
-          <div class="widget">
-            <h2 class="section-title mb-3">Categories</h2>
-            <div class="widget-body">
-              <ul class="widget-list">
-                <li><a href="#!">computer<span class="ml-auto">(3)</span></a></li>
-                <li><a href="#!">cruises<span class="ml-auto">(2)</span></a></li>
-                <li><a href="#!">destination<span class="ml-auto">(1)</span></a></li>
-                <li><a href="#!">lifestyle<span class="ml-auto">(2)</span></a></li>
-                <li><a href="#!">news<span class="ml-auto">(5)</span></a></li>
-                <li><a href="#!">tips<span class="ml-auto">(1)</span></a></li>
-                <li><a href="#!">travel<span class="ml-auto">(3)</span></a></li>
+          <div class="mt-8">
+            <h2 class="text-xl font-bold mb-3">Categories</h2>
+            <div class="bg-white p-6 shadow-[0_5px_25px_rgba(0,0,0,0.05)]">
+              <ul class="list-none p-0 m-0">
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">computer<span class="ml-auto">(3)</span></a></li>
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">cruises<span class="ml-auto">(2)</span></a></li>
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">destination<span class="ml-auto">(1)</span></a></li>
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">lifestyle<span class="ml-auto">(2)</span></a></li>
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">news<span class="ml-auto">(5)</span></a></li>
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">tips<span class="ml-auto">(1)</span></a></li>
+                <li><a href="#!" class="flex justify-between items-center bg-gray-100 text-black capitalize py-1.5 px-4 mb-2.5 text-sm hover:bg-primary/25 transition">travel<span class="ml-auto">(3)</span></a></li>
               </ul>
             </div>
           </div>
         </div>
 
         <!-- About me + Articles — справа -->
-        <div class="col-lg-8 mb-5 mb-lg-0">
-          <h2 class="section-title">About me</h2>
+        <div class="w-full lg:w-2/3 mb-12 lg:mb-0">
+          <h2 class="text-xl font-bold mb-3">About me</h2>
           <p class="mb-4">
             Mechanical design engineer with 20+ years professional experience with a
             solid background in machine design, tools, fixtures, dies, special machinery.
             Providing technology of manufacturing mechanical parts.
           </p>
-          <h2 class="section-title">Latest Articles</h2>
-          <div class="row">
+          <h2 class="text-xl font-bold mb-3">Latest Articles</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             {posts.map((post, index) => (
-              <div class={index === 0 ? 'col-12 mb-4' : 'col-md-6 mb-4'}>
+              <div class={index === 0 ? 'col-span-full' : ''}>
                 <PostCard
                   title={post.title}
                   description={post.description}

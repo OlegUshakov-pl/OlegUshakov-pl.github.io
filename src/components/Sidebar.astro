@@ -2,20 +2,20 @@
 const base = import.meta.env.BASE_URL;
 ---
 
-<div class="widget mb-4">
-  <div class="widget-body">
+<div class="mb-4">
+  <div class="bg-white p-6 shadow-[0_5px_25px_rgba(0,0,0,0.05)]">
     <img
       loading="lazy"
       decoding="async"
       src={`${base}images/sonic.jpg`}
       alt="About Me"
-      class="w-100 author-thumb-sm d-block"
+      class="w-full h-[150px] object-cover block"
     />
-    <h2 class="widget-title my-3">Oleg Ushakov</h2>
+    <h2 class="text-xl font-bold my-3">Oleg Ushakov</h2>
     <p class="mb-3 pb-2">Mechanical design engineer / Developer</p>
-    <p><a href="https://x.com/Olek123zip">@Olek123zip</a></p>
-    <p><a href="https://x.com/olek_tam">@olek_tam</a></p>
-    <p><a href="https://www.linkedin.com/in/oleg-ushakov-29212829/">Linkedin</a></p>
-    <a href={`${base}about`} class="btn btn-sm btn-outline-primary">Know More</a>
+    <p><a href="https://x.com/Olek123zip" class="hover:text-primary transition">@Olek123zip</a></p>
+    <p><a href="https://x.com/olek_tam" class="hover:text-primary transition">@olek_tam</a></p>
+    <p><a href="https://www.linkedin.com/in/oleg-ushakov-29212829/" class="hover:text-primary transition">Linkedin</a></p>
+    <a href={`${base}about`} class="inline-block mt-3 border border-primary text-primary px-6 py-2.5 text-sm font-medium hover:bg-primary hover:text-white transition">Know More</a>
   </div>
 </div>
