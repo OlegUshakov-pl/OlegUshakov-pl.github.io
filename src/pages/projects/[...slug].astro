@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={`${project.data.title} - Reporter Blog`} description={project.data.description}>
+  <section class="py-8">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="w-full lg:w-2/3 mb-12 lg:mb-0">
+          <article>
+            {project.data.heroImage && (
+              <img loading="lazy" decoding="async" src={project.data.heroImage} alt="Project Thumbnail" class="w-full">
+            )}
+            <ul class="flex gap-0 p-0 list-none mb-2 mt-4">
+              <li class="inline-flex items-center text-gray-500 font-medium">
+                <i class="fa-regular fa-calendar text-dark" style="margin-right:5px"></i>
+                <span>{project.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+              </li>
+            </ul>
+            <h1 class="text-4xl font-bold my-3">{project.data.title}</h1>
+            {project.data.tags && project.data.tags.length > 0 && (
+              <ul class="flex flex-wrap gap-0 mb-4 p-0 list-none">
+                {project.data.tags.map(tag => (
+                  <li>
+                    <a href={`${base}projects?tag=${tag}`} class="inline-block bg-gray-100 text-black capitalize py-0.5 px-2 mb-2 mr-0.5 text-sm hover:bg-primary/25 transition">{tag}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div class="content text-left">
+              <Content />
+            </div>
+          </article>
+        </div>
+        <div class="w-full lg:w-1/3">
+          <Sidebar />
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
