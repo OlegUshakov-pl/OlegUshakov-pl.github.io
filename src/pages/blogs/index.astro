@@ -1,49 +1,73 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import PostCard from '../../components/PostCard.astro';
 import Sidebar from '../../components/Sidebar.astro';
+import Recommended from '../../components/Recommended.astro';
 import { getCollection } from 'astro:content';
 
 const posts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const latestProjects = (await getCollection('projects'))
+  .filter(project => !project.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const latestPosts = (await getCollection('posts'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Notes - Reporter Blog">
-  <section class="py-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="flex flex-col lg:flex-row gap-8">
-
-        <!-- Sidebar + Categories — слева -->
-        <div class="w-full lg:w-1/3">
-          <Sidebar />
+<BaseLayout title="Blogs - Oleg Ushakov">
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-1">
+          <div class="space-y-8">
+            <Sidebar />
+            <Recommended projects={latestProjects} posts={latestPosts} />
+          </div>
         </div>
+        <div class="lg:col-span-2">
+          <div class="bg-white panel p-6 mb-6">
+            <h1 class="text-2xl sm:text-2xl text-gray-900 mb-2 font-semibold">Blogs</h1>
+            <p class="text-gray-700 leading-relaxed">
+              Here you can find my blog posts and articles.
+            </p>
+          </div>
 
-        <!-- About me + Articles — справа -->
-        <div class="w-full lg:w-2/3 mb-12 lg:mb-0">
-          <h2 class="text-xl font-bold mb-3">About me</h2>
-          <p class="mb-4">
-            Mechanical design engineer with 20+ years professional experience with a
-            solid background in machine design, tools, fixtures, dies, special machinery.
-            Providing technology of manufacturing mechanical parts.
-          </p>
-          <h2 class="text-xl font-bold mb-3">Latest Articles</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {posts.map((post, index) => (
-              <div class={index === 0 ? 'col-span-full' : ''}>
-                <PostCard
-                  title={post.data.title}
-                  description={post.data.description}
-                  date={post.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}
-                  image={post.data.heroImage}
-                  tags={post.data.tags}
-                  slug={post.id}
-                />
-              </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {posts.map((post) => (
+              <article class="bg-white panel overflow-hidden group hover:shadow-md transition-shadow">
+                <a href={`${base}blogs/${post.id}`}>
+                  <div class="relative overflow-hidden">
+                    {post.data.heroImage && (
+                      <img loading="lazy" decoding="async" src={post.data.heroImage} alt="Post Thumbnail" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300" />
+                    )}
+                    <div class="absolute top-3 left-3 flex gap-2">
+                      <span class="bg-primary text-white text-xs font-semibold px-2.5 py-1">{post.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+                    </div>
+                  </div>
+                </a>
+                <div class="p-5">
+                  <h3 class="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                    <a href={`${base}blogs/${post.id}`}>{post.data.title}</a>
+                  </h3>
+                  <p class="text-gray-600 text-sm mb-4 line-clamp-2">{post.data.description}</p>
+                  <div class="flex items-center justify-between">
+                    <a href={`${base}blogs/${post.id}`} class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+                      Read More
+                      <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </article>
             ))}
           </div>
         </div>
-
       </div>
     </div>
   </section>
