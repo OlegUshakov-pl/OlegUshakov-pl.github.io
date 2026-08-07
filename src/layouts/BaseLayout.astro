@@ -91,31 +91,10 @@ const base = import.meta.env.BASE_URL;
                     >
                         <ul class="flex items-center gap-6">
                             <li>
-                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}about`}>About Me</a>
-                            </li>
-                            <li class="relative" x-data="{ dropdownOpen: false }" @mouseenter="dropdownOpen = true" @mouseleave="dropdownOpen = false">
-                                <a
-                                    class="text-sm font-medium capitalize hover:text-primary transition cursor-pointer flex items-center gap-1"
-                                    @click.prevent="dropdownOpen = !dropdownOpen"
-                                >
-                                    Articles
-                                    <i class="fa-solid fa-chevron-down text-xs"></i>
-                                </a>
-                                <div
-                                    x-show="dropdownOpen"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 translate-y-1"
-                                    class="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white shadow-lg rounded-md py-2 z-50"
-                                >
-                                    <a class="block px-4 py-2 text-sm font-medium hover:bg-gray-50 hover:text-primary" href={`${base}notes`}>Notes</a>
-                                </div>
+                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}notes`}>Blogs</a>
                             </li>
                             <li>
-                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}contact`}>Contact</a>
+                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}projects`}>Projects</a>
                             </li>
                         </ul>
                     </div>
@@ -142,13 +121,10 @@ const base = import.meta.env.BASE_URL;
                             </form>
                             <ul class="flex flex-col gap-3">
                                 <li>
-                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}about`}>About Me</a>
+                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}notes`}>Blogs</a>
                                 </li>
                                 <li>
-                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}notes`}>Articles</a>
-                                </li>
-                                <li>
-                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}contact`}>Contact</a>
+                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}projects`}>Projects</a>
                                 </li>
                             </ul>
                         </div>
@@ -176,10 +152,10 @@ const base = import.meta.env.BASE_URL;
                         </a>
                         <ul class="flex justify-center gap-6 p-0 m-0 list-none">
                             <li>
-                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}about`}>About</a>
+                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}notes`}>Blogs</a>
                             </li>
                             <li>
-                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}notes`}>Articles</a>
+                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}projects`}>Projects</a>
                             </li>
                         </ul>
                     </div>
