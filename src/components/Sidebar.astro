@@ -2,20 +2,30 @@
 const base = import.meta.env.BASE_URL;
 ---
 
-<div class="mb-4">
-  <div class="bg-white p-6 shadow-[0_5px_25px_rgba(0,0,0,0.05)]">
-    <img
-      loading="lazy"
-      decoding="async"
-      src={`${base}images/sonic.jpg`}
-      alt="About Me"
-      class="w-full h-[150px] object-cover block"
-    />
-    <h2 class="text-xl font-bold my-3">Oleg Ushakov</h2>
-    <p class="mb-3 pb-2">Mechanical design engineer / Developer</p>
-    <p><a href="https://x.com/Olek123zip" class="hover:text-primary transition">@Olek123zip</a></p>
-    <p><a href="https://x.com/olek_tam" class="hover:text-primary transition">@olek_tam</a></p>
-    <p><a href="https://www.linkedin.com/in/oleg-ushakov-29212829/" class="hover:text-primary transition">Linkedin</a></p>
-    <a href={`${base}projects`} class="inline-block mt-3 border border-primary text-primary px-6 py-2.5 text-sm font-medium hover:bg-primary hover:text-white transition">Projects</a>
+<div class="bg-white panel p-6">
+  <img loading="lazy" decoding="async" src={`${base}images/sonic.jpg`} alt="About Me" class="w-full mb-4" />
+  <h3 class="text-lg font-bold text-gray-900 mb-2">Oleg Ushakov</h3>
+  <p class="text-sm text-gray-500 mb-3 flex items-center gap-2">
+    <i class="fa-solid fa-location-dot text-primary"></i>
+    Kraków, Poland
+  </p>
+  <a href="https://github.com/OlegUshakov-pl" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-gray-700 hover:text-primary transition-colors mb-4">
+    <i class="fa-brands fa-github text-lg flex-shrink-0"></i>
+    GitHub
+  </a>
+  <p class="text-gray-600 text-sm mb-4"></p>
+  <div class="space-y-3 mb-4">
+    <a href="https://x.com/Olek123zip" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-gray-700 hover:text-primary transition-colors">
+      <i class="fa-brands fa-x-twitter text-lg flex-shrink-0"></i>
+      @Olek123zip
+    </a>
+    <a href="https://threads.net/@olek_tam" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-gray-700 hover:text-primary transition-colors">
+      <i class="fa-brands fa-threads text-lg flex-shrink-0"></i>
+      @olek_tam
+    </a>
+    <a href="https://www.linkedin.com/in/oleg-ushakov-29212829/" target="_blank" rel="noopener" class="flex items-center gap-3 text-sm text-gray-700 hover:text-primary transition-colors">
+      <i class="fa-brands fa-linkedin-in text-lg flex-shrink-0"></i>
+      LinkedIn
+    </a>
   </div>
 </div>

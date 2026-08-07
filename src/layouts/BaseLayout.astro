@@ -9,17 +9,15 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <!doctype html>
-<html lang="en-us">
+<html lang="en-us" class="scroll-smooth">
     <head>
         <meta charset="utf-8" />
         <title>{title}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <meta name="description" content={description} />
-        <meta name="author" content="Themefisher" />
+        <meta name="author" content="Oleg Ushakov" />
         <link rel="shortcut icon" href={`${base}images/favicon.png`} type="image/x-icon" />
         <link rel="icon" href={`${base}images/favicon.png`} type="image/x-icon" />
-
-        <meta name="theme-name" content="reporter" />
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,8 +36,10 @@ const base = import.meta.env.BASE_URL;
                             sans: ['Roboto', 'sans-serif'],
                         },
                         colors: {
-                            primary: '#13AE6F',
-                            dark: '#131313',
+                            primary: '#0d9488',
+                            'primary-dark': '#0f766e',
+                            muted: '#71717a',
+                            sidebar: '#f4f4f5',
                         },
                     },
                 },
@@ -50,103 +50,58 @@ const base = import.meta.env.BASE_URL;
         <link rel="stylesheet" href={`${base}css/style.css`} />
 
     </head>
-    <body class="font-sans text-gray-700 bg-white leading-relaxed antialiased">
-        <header>
-            <div class="max-w-6xl mx-auto px-4 sm:px-6">
-                <nav class="flex items-center justify-between py-6" x-data="{ mobileOpen: false }">
-                    <a class="order-1" href={`${base}`}>
-                        <img
-                            loading="prelaod"
-                            decoding="async"
-                            class="h-auto"
-                            src={`${base}images/logo.png`}
-                            alt="Reporter Hugo"
-                        />
+    <body class="bg-gray-50 text-gray-800 antialiased">
+        <header class="bg-white shadow-sm sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex items-center justify-between h-16">
+                    <a class="flex-shrink-0 flex items-center gap-1.5" href={`${base}`}>
+                        <i class="fa-solid fa-star text-yellow-400"></i>
+                        <span class="text-xl font-bold text-gray-900">Blog</span>
                     </a>
 
-                    <div class="order-3 ml-4 lg:hidden">
-                        <button
-                            aria-label="navbar toggler"
-                            class="text-2xl"
-                            @click="mobileOpen = !mobileOpen"
-                        >
-                            <span x-show="!mobileOpen"><i class="fa-solid fa-bars"></i></span>
-                            <span x-show="mobileOpen"><i class="fa-solid fa-xmark"></i></span>
-                        </button>
-                    </div>
+                    <div class="hidden md:flex items-center gap-6">
+                        <a class="text-gray-700 hover:text-primary font-medium transition-colors text-primary" href={`${base}`}>Home</a>
+                        <a class="text-gray-700 hover:text-primary font-medium transition-colors" href={`${base}projects`}>Projects</a>
+                        <a class="text-gray-700 hover:text-primary font-medium transition-colors" href={`${base}notes`}>Blogs</a>
 
-                    <div
-                        class="hidden lg:flex lg:items-center lg:order-2 lg:ml-auto"
-                    >
-                        <ul class="flex items-center gap-6">
-                            <li>
-                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}`}>Home</a>
-                            </li>
-                            <li>
-                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}notes`}>Blogs</a>
-                            </li>
-                            <li>
-                                <a class="text-sm font-medium capitalize hover:text-primary transition" href={`${base}projects`}>Projects</a>
-                            </li>
-                            <li class="relative" x-data="{ searchOpen: false }">
-                                <button
-                                    @click="searchOpen = !searchOpen"
-                                    class="text-sm font-medium hover:text-primary transition"
-                                >
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
-                                <div
-                                    x-show="searchOpen"
-                                    @click.outside="searchOpen = false"
-                                    x-transition:enter="transition ease-out duration-200"
-                                    x-transition:enter-start="opacity-0 translate-y-1"
-                                    x-transition:enter-end="opacity-100 translate-y-0"
-                                    x-transition:leave="transition ease-in duration-150"
-                                    x-transition:leave-start="opacity-100 translate-y-0"
-                                    x-transition:leave-end="opacity-0 translate-y-1"
-                                    class="absolute right-0 mt-2 w-64 bg-white shadow-lg rounded-md p-2 z-50"
-                                >
-                                    <form action="#!">
-                                        <input
-                                            id="search-query"
-                                            name="s"
-                                            type="search"
-                                            placeholder="Search..."
-                                            autocomplete="off"
-                                            class="border border-gray-300 px-4 py-2.5 w-full text-sm focus:outline-none focus:border-dark"
-                                        />
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <!-- Mobile menu -->
-                    <div
-                        x-show="mobileOpen"
-                        x-transition:enter="transition ease-out duration-200"
-                        x-transition:enter-start="opacity-0 -translate-y-2"
-                        x-transition:enter-end="opacity-100 translate-y-0"
-                        x-transition:leave="transition ease-in duration-150"
-                        x-transition:leave-start="opacity-100 translate-y-0"
-                        x-transition:leave-end="opacity-0 -translate-y-2"
-                        class="absolute top-full left-0 right-0 bg-white border-b border-gray-100 shadow-lg lg:hidden z-50"
-                    >
-                        <div class="max-w-6xl mx-auto px-4 py-4">
-                            <ul class="flex flex-col gap-3">
-                                <li>
-                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}`}>Home</a>
-                                </li>
-                                <li>
-                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}notes`}>Blogs</a>
-                                </li>
-                                <li>
-                                    <a class="block py-2 text-sm font-medium capitalize hover:text-primary" href={`${base}projects`}>Projects</a>
-                                </li>
-                            </ul>
+                        <div class="relative" x-data="{ searchOpen: false }">
+                            <button @click="searchOpen = !searchOpen" aria-label="Search" class="p-2 text-gray-500 hover:text-primary transition-colors">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <div
+                                x-show="searchOpen"
+                                @click.outside="searchOpen = false"
+                                class="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 shadow-lg rounded-lg p-3 z-50"
+                            >
+                                <form action="#!" class="flex items-center relative">
+                                    <input id="search-query" name="s" type="search" placeholder="Search..." class="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all" />
+                                    <i class="fa-solid fa-magnifying-glass absolute left-3 text-gray-400 pointer-events-none"></i>
+                                </form>
+                            </div>
                         </div>
                     </div>
+
+                    <button id="mobile-menu-btn" aria-label="Toggle menu" class="md:hidden p-2 text-gray-700 hover:text-primary" @click="mobileOpen = !mobileOpen">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
                 </nav>
+
+                <div
+                    x-show="mobileOpen"
+                    x-transition:enter="transition ease-out duration-200"
+                    x-transition:enter-start="opacity-0 -translate-y-2"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    x-transition:leave="transition ease-in duration-150"
+                    x-transition:leave-start="opacity-100 translate-y-0"
+                    x-transition:leave-end="opacity-0 -translate-y-2"
+                    class="md:hidden pb-4 border-t border-gray-100 mt-2 pt-4"
+                >
+                    <div class="flex flex-col space-y-3">
+                        <a class="text-gray-700 hover:text-primary font-medium py-2 text-primary" href={`${base}`}>Home</a>
+                        <a class="text-gray-700 hover:text-primary font-medium py-2" href={`${base}projects`}>Projects</a>
+                        <a class="text-gray-700 hover:text-primary font-medium py-2" href={`${base}notes`}>Blogs</a>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -154,29 +109,9 @@ const base = import.meta.env.BASE_URL;
             <slot />
         </main>
 
-        <footer class="bg-dark mt-16">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-                <div class="flex justify-center">
-                    <div class="w-full lg:w-10/12 text-center">
-                        <a class="inline-block mb-4 pb-2" href={`${base}`}>
-                            <img
-                                loading="prelaod"
-                                decoding="async"
-                                class="h-auto"
-                                src={`${base}images/logo-white.png`}
-                                alt="Reporter Hugo"
-                            />
-                        </a>
-                        <ul class="flex justify-center gap-6 p-0 m-0 list-none">
-                            <li>
-                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}notes`}>Blogs</a>
-                            </li>
-                            <li>
-                                <a class="text-white text-sm font-medium hover:text-primary hover:underline transition" href={`${base}projects`}>Projects</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+        <footer class="border-t border-gray-200 mt-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <p class="text-center text-sm text-gray-500">Copyright © 2026 Oleg Ushakov<span> <a href="https://github.com/OlegUshakov-pl" class="ml-2 text-blue-500">GitHub</a></span></p>
             </div>
         </footer>
 
