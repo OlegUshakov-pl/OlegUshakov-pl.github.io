@@ -7,7 +7,7 @@ tags:
   - Project
 draft: false
 ---
-![](menu.png)
+![](/images/project/menu.png)
 
 # **Screenshot Tool**
 
