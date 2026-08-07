@@ -3,10 +3,11 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "concurrently \"node scripts/git-commit-server.mjs\" \"astro dev\"",
-    "build": "astro build",
+    "dev": "concurrently \"node scripts/git-commit-server.mjs\" \"node scripts/generate-search-index.mjs\" \"astro dev\"",
+    "build": "node scripts/generate-search-index.mjs && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-search": "node scripts/generate-search-index.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.0.3",

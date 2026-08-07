@@ -1,0 +1,44 @@
+[
+  {
+    "title": "Start_learn_Rust_language",
+    "description": "There are will be programms in the folder Rust",
+    "url": "/blogs/start-learn-rust-language",
+    "type": "Blog"
+  },
+  {
+    "title": "Started to learn V language",
+    "description": "Started to learn V language",
+    "url": "/blogs/started-to-learn-v-language",
+    "type": "Blog"
+  },
+  {
+    "title": "A simple-screenshot-extension",
+    "description": "A Chrome/Edge extension for taking screenshots with annotations",
+    "url": "/projects/a-simple-screenshot-extension",
+    "type": "Project"
+  },
+  {
+    "title": "CRM",
+    "description": ">-",
+    "url": "/projects/crm",
+    "type": "Project"
+  },
+  {
+    "title": "Cycloidal Drive Profile Calculator (VPTK)",
+    "description": ">-",
+    "url": "/projects/cycloidal-drive-profile-calculator-vptk",
+    "type": "Project"
+  },
+  {
+    "title": "Simple Lorem Ipsum Generator — Edge Extension",
+    "description": "Edge Extension",
+    "url": "/projects/simple-lorem-ipsum-generator-edge-extension",
+    "type": "Project"
+  },
+  {
+    "title": "The stair calculator ISO 14122",
+    "description": "the-stair-calculator-ISO-14122",
+    "url": "/projects/the-stair-calculator-iso-14122",
+    "type": "Project"
+  }
+]
