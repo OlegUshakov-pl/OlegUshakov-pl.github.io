@@ -8,13 +8,15 @@ Personal blog and portfolio site built with [Astro](https://astro.build). It fea
 - **Keystatic CMS** — visual admin interface at `/keystatic` for editing blog posts and projects. Runs in `local` storage mode, meaning edits are written directly to Markdown files on disk.
 - **Commit & Push page** — a dev-only page at `/commit` that runs `git add`, `git commit`, and `git push` through a local helper server.
 - **Search index** — a script that scans content frontmatter and generates `public/search-index.json` for site search.
-- **Reporter Bootstrap design** — the UI is converted from the Themefisher Reporter Bootstrap theme, keeping the original Bootstrap layout and styling.
+- **Tailwind CSS + Alpine.js** — utility-first styling via Tailwind CSS (CDN) with interactive widgets powered by Alpine.js; Font Awesome is used for icons.
 
 ## Tech Stack
 
 - [Astro](https://astro.build) (static output) with `@astrojs/react` and `@astrojs/node` adapter
 - [Keystatic](https://keystatic.com) (`@keystatic/core`, `@keystatic/astro`) — local storage CMS
-- [Bootstrap](https://getbootstrap.com) (v5) — styling
+- [Tailwind CSS](https://tailwindcss.com) — styling (via CDN)
+- [Alpine.js](https://alpinejs.dev) — interactive UI widgets
+- [Font Awesome](https://fontawesome.com) — icons
 - Node.js >= 22
 
 ## Getting Started
