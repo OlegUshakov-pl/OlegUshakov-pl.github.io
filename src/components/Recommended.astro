@@ -1,0 +1,87 @@
+---
+interface Project {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    heroImage?: string;
+  };
+}
+
+interface Post {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+    heroImage?: string;
+  };
+}
+
+interface Props {
+  projects: Project[];
+  posts: Post[];
+}
+
+const { projects, posts } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<div class="bg-white panel p-6">
+  <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+    <i class="fa-solid fa-bookmark text-primary"></i>
+    Recommended
+  </h3>
+  <div class="space-y-4">
+    {projects.map((project) => (
+      <article class="group">
+        <a href={`${base}projects/${project.id}`} class="flex gap-3">
+          {project.data.heroImage && (
+            <img loading="lazy" decoding="async" src={project.data.heroImage} alt="Project Thumbnail" class="w-20 h-20 object-cover flex-shrink-0" />
+          )}
+          <div>
+            <h4 class="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors line-clamp-2">{project.data.title}</h4>
+            <div class="flex items-center gap-2 mt-1 text-xs text-gray-500">
+              <i class="fa-regular fa-calendar text-xs"></i>
+              <span>{project.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+  <a href={`${base}projects`} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+    View All
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
+</div>
+
+<div class="bg-white panel p-6">
+  <h3 class="text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+    <i class="fa-solid fa-bookmark text-primary"></i>
+    Latest Blogs
+  </h3>
+  <div class="space-y-4">
+    {posts.map((post) => (
+      <article class="group">
+        <a href={`${base}notes/${post.id}`} class="flex gap-3">
+          {post.data.heroImage && (
+            <img loading="lazy" decoding="async" src={post.data.heroImage} alt="Post Thumbnail" class="w-20 h-20 object-cover flex-shrink-0" />
+          )}
+          <div>
+            <h4 class="text-sm font-semibold text-gray-900 group-hover:text-primary transition-colors line-clamp-2">{post.data.title}</h4>
+            <div class="flex items-center gap-2 mt-1 text-xs text-gray-500">
+              <i class="fa-regular fa-calendar text-xs"></i>
+              <span>{post.data.pubDate.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
+  <a href={`${base}notes`} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+    View All
+    <i class="fa-solid fa-arrow-right"></i>
+  </a>
+</div>
