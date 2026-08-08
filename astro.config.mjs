@@ -9,6 +9,7 @@ export default defineConfig({
   integrations: [
     react(),
     markdoc(),
-    keystatic(),
+    // Keystatic только в разработке
+    ...(process.env.NODE_ENV === 'production' ? [] : [keystatic()]),
   ],
 });
