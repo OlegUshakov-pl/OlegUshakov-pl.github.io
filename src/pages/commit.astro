@@ -46,10 +46,10 @@ export const prerender = false;
 </BaseLayout>
 
 <script>
-  const form = document.getElementById('commit-form') as HTMLFormElement;
-  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-  const resultDiv = document.getElementById('result') as HTMLDivElement;
-  const resultMessage = document.getElementById('result-message') as HTMLDivElement;
+  const form = document.getElementById('commit-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const resultDiv = document.getElementById('result');
+  const resultMessage = document.getElementById('result-message');
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -94,7 +94,7 @@ export const prerender = false;
     }
   });
 
-  function showResult(message: string, success: boolean) {
+  function showResult(message, success) {
     resultDiv.style.display = 'block';
     resultMessage.textContent = message;
     resultMessage.className = success ? 'p-3 bg-green-100 text-green-800 border border-green-300' : 'p-3 bg-red-100 text-red-800 border border-red-300';

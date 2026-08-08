@@ -4,6 +4,8 @@ import Sidebar from '../../components/Sidebar.astro';
 import Recommended from '../../components/Recommended.astro';
 import { getCollection, render } from 'astro:content';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map(post => ({

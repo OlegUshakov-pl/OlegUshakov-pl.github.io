@@ -19,13 +19,13 @@
   },
   {
     "title": "CRM",
-    "description": ">-",
+    "description": "This CRM is built for small and medium-sized businesses that need a reliable, organized way to manage project documentation and reference materials. ",
     "url": "/projects/crm",
     "type": "Project"
   },
   {
     "title": "Cycloidal Drive Profile Calculator (VPTK)",
-    "description": ">-",
+    "description": "A Streamlit application for calculating and visualizing the profile of a cycloidal drive with intermediate rolling elements (also known as VPTK — Volnovoy Reduktor s Promezhutochnymi Telami Kacheniya).",
     "url": "/projects/cycloidal-drive-profile-calculator-vptk",
     "type": "Project"
   },
