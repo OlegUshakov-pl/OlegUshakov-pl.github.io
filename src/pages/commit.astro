@@ -1,12 +1,5 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-// Only render in dev mode - redirect in production
-if (!import.meta.env.DEV) {
-    return Astro.redirect("/");
-}
-
-export const prerender = true;
 ---
 
 <BaseLayout title="Commit & Push - Reporter Blog">
@@ -60,7 +53,7 @@ export const prerender = true;
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const messageInput = document.getElementById("commit-message") as HTMLInputElement;
+        const messageInput = document.getElementById("commit-message") as HTMLInputElement | null;
         const message = messageInput?.value.trim();
 
         if (!message) {
@@ -68,8 +61,10 @@ export const prerender = true;
             return;
         }
 
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Processing...";
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Processing...";
+        }
 
         try {
             const response = await fetch("http://127.0.0.1:4001/commit", {
@@ -85,7 +80,7 @@ export const prerender = true;
             if (data.ok) {
                 if (data.changed) {
                     showResult("Changes committed and pushed successfully!", true);
-                    messageInput.value = "";
+                    if (messageInput) messageInput.value = "";
                 } else {
                     showResult("No changes to commit.", false);
                 }
@@ -95,12 +90,14 @@ export const prerender = true;
         } catch (error) {
             showResult("Failed to connect to git server. Make sure it's running.", false);
         } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = "Commit & Push";
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Commit & Push";
+            }
         }
     });
 
-    function showResult(message, success) {
+    function showResult(message: string, success: boolean) {
         resultDiv.style.display = "block";
         resultMessage.textContent = message;
         resultMessage.className = success

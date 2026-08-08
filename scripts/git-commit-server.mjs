@@ -1,5 +1,5 @@
 import { createServer } from 'node:http';
-import { execSync } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 
 const server = createServer(async (req, res) => {
   // Enable CORS for local development
@@ -32,10 +32,10 @@ const server = createServer(async (req, res) => {
       }
 
       // Git add -A
-      execSync('git add -A', { stdio: 'pipe' });
+      execFileSync('git', ['add', '-A'], { stdio: 'pipe' });
 
       // Check if there are changes
-      const diffOutput = execSync('git diff --cached --name-only', { encoding: 'utf-8' });
+      const diffOutput = execFileSync('git', ['diff', '--cached', '--name-only'], { encoding: 'utf-8' });
       
       if (!diffOutput.trim()) {
         res.writeHead(200, { 'Content-Type': 'application/json' });
@@ -44,10 +44,10 @@ const server = createServer(async (req, res) => {
       }
 
       // Commit with message
-      execSync(`git commit -m "${message.replace(/"/g, '\\"')}"`, { stdio: 'pipe' });
+      execFileSync('git', ['commit', '-m', message], { stdio: 'pipe' });
 
       // Push
-      execSync('git push', { stdio: 'pipe' });
+      execFileSync('git', ['push'], { stdio: 'pipe' });
 
       res.writeHead(200, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ ok: true, changed: true }));

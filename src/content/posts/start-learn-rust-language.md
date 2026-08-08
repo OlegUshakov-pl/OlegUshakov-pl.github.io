@@ -1,5 +1,5 @@
 ---
-title: Start_learn_Rust_language
+title: Start learn Rust language
 description: There are will be programms in the folder Rust
 pubDate: 2026-07-19
 heroImage: /images/project/rust.png

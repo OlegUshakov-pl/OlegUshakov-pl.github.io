@@ -1,12 +1,12 @@
 [
   {
-    "title": "New page",
+    "title": "My new page",
     "description": "my new page",
     "url": "/blogs/new-page",
     "type": "Blog"
   },
   {
-    "title": "Start_learn_Rust_language",
+    "title": "Start learn Rust language",
     "description": "There are will be programms in the folder Rust",
     "url": "/blogs/start-learn-rust-language",
     "type": "Blog"

@@ -187,7 +187,7 @@ const base = import.meta.env.BASE_URL;
         <footer class="border-t border-gray-200 mt-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                 <p class="text-center text-sm text-gray-500">
-                    Copyright © 2026 Oleg Ushakov<span>
+                    Copyright &copy; {new Date().getFullYear()} Oleg Ushakov<span>
                         <a
                             href="https://github.com/OlegUshakov-pl"
                             class="ml-2 text-blue-500">GitHub</a
@@ -196,10 +196,10 @@ const base = import.meta.env.BASE_URL;
             </div>
         </footer>
 
-        <script is:inline>
+        <script>
             let searchIndex = [];
 
-            fetch(`${base}search-index.json`)
+            fetch("/search-index.json")
                 .then(res => res.json())
                 .then(data => { searchIndex = data; })
                 .catch(() => {});
