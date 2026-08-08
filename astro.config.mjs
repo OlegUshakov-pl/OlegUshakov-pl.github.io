@@ -6,8 +6,8 @@ import keystatic from '@keystatic/astro';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.github.io',
-  output: 'server',
+  site: 'https://olegushakov-pl.github.io',
+  output: 'static',
   adapter: node({
     mode: 'standalone',
   }),
