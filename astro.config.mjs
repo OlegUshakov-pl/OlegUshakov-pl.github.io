@@ -7,9 +7,10 @@ import keystatic from '@keystatic/astro';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://olegushakov-pl.github.io',
-  output: 'static',
-  adapter: node({
-    mode: 'standalone',
-  }),
-  integrations: [react(), keystatic()],
+  output: 'static',          // ← обязательно
+  integrations: [
+    react(),
+    markdoc(),
+    keystatic(),
+  ],
 });
