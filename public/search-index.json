@@ -1,5 +1,11 @@
 [
   {
+    "title": "New page",
+    "description": "my new page",
+    "url": "/blogs/new-page",
+    "type": "Blog"
+  },
+  {
     "title": "Start_learn_Rust_language",
     "description": "There are will be programms in the folder Rust",
     "url": "/blogs/start-learn-rust-language",

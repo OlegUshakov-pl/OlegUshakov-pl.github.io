@@ -9,7 +9,13 @@ export default defineConfig({
   integrations: [
     react(),
     markdoc(),
-    // Keystatic только локально (не в production)
     ...(process.env.NODE_ENV === 'production' ? [] : [keystatic()]),
   ],
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
+  },
 });
