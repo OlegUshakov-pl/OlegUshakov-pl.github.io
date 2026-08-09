@@ -91,30 +91,33 @@ const latestPosts = (await getCollection("posts"))
     <script>
         const form = document.getElementById("contact-form");
         const status = document.getElementById("form-status");
-        const SCRIPT_URL = "https://script.google.com/macros/s/ТВОЙ_URL/exec";
+        const SCRIPT_URL = "https://olegushakov-pl.github.io/";
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            status.textContent = "Send...";
+            status.textContent = "Sending...";
 
-            const formData = new FormData(form);
+            const payload = {
+                name: form.name.value,
+                email: form.email.value,
+                message: form.message.value,
+                website: form.website.value || "",
+            };
 
             try {
-                const response = await fetch(SCRIPT_URL, {
+                await fetch(SCRIPT_URL, {
                     method: "POST",
-                    body: formData,
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(payload),
                 });
 
-                const result = await response.json();
-
-                if (result.result === "success") {
-                    status.textContent = "Message sent!";
-                    form.reset();
-                } else {
-                    status.textContent = "Error: " + (result.message || "something does wrong...");
-                }
+                status.textContent = "Message sent!";
+                form.reset();
             } catch (err) {
-                status.textContent = "Error of enternet";
+                status.textContent = "Internet error";
             }
         });
     </script>
