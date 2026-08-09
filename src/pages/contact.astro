@@ -98,28 +98,25 @@ const latestPosts = (await getCollection("posts"))
             e.preventDefault();
             status.textContent = "Sending...";
 
-            // Собираем данные формы в простой JS-объект
             const formData = new FormData(form);
             const object = {};
             formData.forEach((value, key) => (object[key] = value));
 
             try {
-                // Отправляем как простой текст (text/plain) с mode: 'no-cors'
-                // Это гарантирует, что браузер пропустит запрос к Google без CORS ошибок
+                // Отправляем как text/plain, чтобы избежать жестких CORS-проверок со стороны Google
                 const response = await fetch(SCRIPT_URL, {
                     method: "POST",
-                    mode: "no-cors",
-                    headers: {
-                        "Content-Type": "text/plain",
-                    },
                     body: JSON.stringify(object),
                 });
 
-                // При mode: 'no-cors' браузер непрозрачно возвращает тип "opaque"
-                // Мы не можем прочитать response.json() напрямую (он будет пустым),
-                // но если ошибок сети не было — значит, запрос успешно улетел в Google Apps Script!
-                status.textContent = "Message sent!";
-                form.reset();
+                const result = await response.json();
+
+                if (result.result === "success") {
+                    status.textContent = "Message sent!";
+                    form.reset();
+                } else {
+                    status.textContent = "Error: " + (result.message || "Something went wrong...");
+                }
             } catch (err) {
                 console.error("Submission error:", err);
                 status.textContent = "Network error. Please try again.";
