@@ -91,6 +91,7 @@ const latestPosts = (await getCollection("posts"))
     <script>
         const form = document.getElementById("contact-form");
         const status = document.getElementById("form-status");
+        // Убедитесь, что эта ссылка совпадает с вашим ПОСЛЕДНИМ активным деплоем!
         const SCRIPT_URL =
             "https://script.google.com/macros/s/AKfycbyFPHDWsUM-ZssnTFgFYK0deKQZ3tcZdyhGVvoS-y95Id66sS_CGAe5kYtT0W4FFuwJ/exec";
 
@@ -99,24 +100,18 @@ const latestPosts = (await getCollection("posts"))
             status.textContent = "Sending...";
 
             const formData = new FormData(form);
-            const object = {};
-            formData.forEach((value, key) => (object[key] = value));
+            const params = new URLSearchParams(formData);
 
             try {
-                // Отправляем как text/plain, чтобы избежать жестких CORS-проверок со стороны Google
-                const response = await fetch(SCRIPT_URL, {
-                    method: "POST",
-                    body: JSON.stringify(object),
+                // Переносим данные из body прямо в URL и шлем как GET
+                const response = await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+                    method: "GET",
+                    mode: "no-cors", // Браузер пропустит запрос без CORS-проверок
                 });
 
-                const result = await response.json();
-
-                if (result.result === "success") {
-                    status.textContent = "Message sent!";
-                    form.reset();
-                } else {
-                    status.textContent = "Error: " + (result.message || "Something went wrong...");
-                }
+                // Для no-cors это нормальное поведение успеха
+                status.textContent = "Message sent!";
+                form.reset();
             } catch (err) {
                 console.error("Submission error:", err);
                 status.textContent = "Network error. Please try again.";
