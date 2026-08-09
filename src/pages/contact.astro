@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Contact - Oleg Ushakov" description="Get in touch with Oleg Ushakov">
+  <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">Contact</h1>
+    <p class="text-gray-500 mb-8">Have a question or want to get in touch? Fill out the form below.</p>
+
+    <form id="contact-form" class="bg-white shadow-sm rounded-lg p-6 space-y-5">
+      <div>
+        <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+        />
+      </div>
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+        />
+      </div>
+      <div>
+        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all resize-none"
+        ></textarea>
+      </div>
+      <button
+        type="submit"
+        class="w-full bg-primary hover:bg-primary-dark text-white font-medium py-2.5 rounded-lg transition-colors"
+      >
+        Send Message
+      </button>
+      <p id="form-status" class="text-sm text-center mt-2"></p>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const status = document.getElementById('form-status');
+    const SCRIPT_URL = 'https://script.google.com/macros/s/ТВОЙ_URL/exec';
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Отправка...';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (result.result === 'success') {
+          status.textContent = 'Сообщение успешно отправлено!';
+          form.reset();
+        } else {
+          status.textContent = 'Ошибка: ' + (result.message || 'что-то пошло не так');
+        }
+      } catch (err) {
+        status.textContent = 'Ошибка сети';
+      }
+    });
+  </script>
+</BaseLayout>
