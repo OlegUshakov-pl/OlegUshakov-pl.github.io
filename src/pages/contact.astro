@@ -98,12 +98,18 @@ const latestPosts = (await getCollection("posts"))
             e.preventDefault();
             status.textContent = "Sending...";
 
+            // Преобразуем FormData в строку параметров для стабильной отправки в Google Script
             const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
 
             try {
                 const response = await fetch(SCRIPT_URL, {
                     method: "POST",
-                    body: formData,
+                    mode: "cors", // Разрешаем CORS-запросы
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: params.toString(),
                 });
 
                 const result = await response.json();
@@ -112,10 +118,11 @@ const latestPosts = (await getCollection("posts"))
                     status.textContent = "Message sent!";
                     form.reset();
                 } else {
-                    status.textContent = "Error: " + (result.message || "Something wrong.....");
+                    status.textContent = "Error: " + (result.message || "Something went wrong...");
                 }
             } catch (err) {
-                status.textContent = "Enternet error";
+                console.error("Submission error:", err);
+                status.textContent = "Network error. Please try again.";
             }
         });
     </script>
