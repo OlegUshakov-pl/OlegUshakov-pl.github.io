@@ -91,34 +91,31 @@ const latestPosts = (await getCollection("posts"))
     <script>
         const form = document.getElementById("contact-form");
         const status = document.getElementById("form-status");
-        const SCRIPT_URL = "https://olegushakov-pl.github.io/";
+        const SCRIPT_URL =
+            "https://script.google.com/macros/s/AKfycbxF9qSA7E7VGxOcdf-c0XOnHkQz9A7Y234JgM4GXYNhBaBID8IIyx-AZrh26pvnpvAy/exec";
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            status.textContent = "Sending...";
+            status.textContent = "Отправка...";
 
-            const payload = {
-                name: form.name.value,
-                email: form.email.value,
-                message: form.message.value,
-                website: form.website.value || "",
-            };
+            const formData = new FormData(form);
 
             try {
-                await fetch(SCRIPT_URL, {
+                const response = await fetch(SCRIPT_URL, {
                     method: "POST",
-                    mode: "no-cors",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload),
+                    body: formData,
                 });
 
-                // Мы не читаем ответ — просто показываем успех
-                status.textContent = "Message sent!";
-                form.reset();
+                const result = await response.json();
+
+                if (result.result === "success") {
+                    status.textContent = "Сообщение успешно отправлено!";
+                    form.reset();
+                } else {
+                    status.textContent = "Ошибка: " + (result.message || "что-то пошло не так");
+                }
             } catch (err) {
-                status.textContent = "Internet error";
+                status.textContent = "Ошибка сети";
             }
         });
     </script>
