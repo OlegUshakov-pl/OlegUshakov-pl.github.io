@@ -114,6 +114,7 @@ const latestPosts = (await getCollection("posts"))
                     body: JSON.stringify(payload),
                 });
 
+                // Мы не читаем ответ — просто показываем успех
                 status.textContent = "Message sent!";
                 form.reset();
             } catch (err) {
