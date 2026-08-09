@@ -96,7 +96,7 @@ const latestPosts = (await getCollection("posts"))
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
-            status.textContent = "Отправка...";
+            status.textContent = "Sending...";
 
             const formData = new FormData(form);
 
@@ -109,13 +109,13 @@ const latestPosts = (await getCollection("posts"))
                 const result = await response.json();
 
                 if (result.result === "success") {
-                    status.textContent = "Сообщение успешно отправлено!";
+                    status.textContent = "Message sent!";
                     form.reset();
                 } else {
-                    status.textContent = "Ошибка: " + (result.message || "что-то пошло не так");
+                    status.textContent = "Error: " + (result.message || "Something wrong.....");
                 }
             } catch (err) {
-                status.textContent = "Ошибка сети";
+                status.textContent = "Enternet error";
             }
         });
     </script>
