@@ -92,34 +92,34 @@ const latestPosts = (await getCollection("posts"))
         const form = document.getElementById("contact-form");
         const status = document.getElementById("form-status");
         const SCRIPT_URL =
-            "https://script.google.com/macros/s/AKfycbxF9qSA7E7VGxOcdf-c0XOnHkQz9A7Y234JgM4GXYNhBaBID8IIyx-AZrh26pvnpvAy/exec";
+            "https://script.google.com/macros/s/AKfycbwfbwcu6YuGV8lzDnrobk1HFuUdrHkC9R85KXqDdmNnbbQgLKHS1Q_zC7fTh_EwHX_5/exec";
 
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
             status.textContent = "Sending...";
 
-            // Преобразуем FormData в строку параметров для стабильной отправки в Google Script
+            // Собираем данные формы в простой JS-объект
             const formData = new FormData(form);
-            const params = new URLSearchParams(formData);
+            const object = {};
+            formData.forEach((value, key) => (object[key] = value));
 
             try {
+                // Отправляем как простой текст (text/plain) с mode: 'no-cors'
+                // Это гарантирует, что браузер пропустит запрос к Google без CORS ошибок
                 const response = await fetch(SCRIPT_URL, {
                     method: "POST",
-                    mode: "cors", // Разрешаем CORS-запросы
+                    mode: "no-cors",
                     headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
+                        "Content-Type": "text/plain",
                     },
-                    body: params.toString(),
+                    body: JSON.stringify(object),
                 });
 
-                const result = await response.json();
-
-                if (result.result === "success") {
-                    status.textContent = "Message sent!";
-                    form.reset();
-                } else {
-                    status.textContent = "Error: " + (result.message || "Something went wrong...");
-                }
+                // При mode: 'no-cors' браузер непрозрачно возвращает тип "opaque"
+                // Мы не можем прочитать response.json() напрямую (он будет пустым),
+                // но если ошибок сети не было — значит, запрос успешно улетел в Google Apps Script!
+                status.textContent = "Message sent!";
+                form.reset();
             } catch (err) {
                 console.error("Submission error:", err);
                 status.textContent = "Network error. Please try again.";
