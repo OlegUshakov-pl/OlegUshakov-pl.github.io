@@ -23,10 +23,11 @@ const latestProjects = (await getCollection('projects'))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 
-const latestPosts = (await getCollection('posts'))
+const allPosts = (await getCollection('posts'))
   .filter(p => !p.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const latestPosts = allPosts.slice(0, 3);
 ---
 
 <BaseLayout title={`${post.data.title} - Oleg Ushakov`} description={post.data.description}>

@@ -53,7 +53,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     form?.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const messageInput = document.getElementById("commit-message") as HTMLInputElement | null;
+        const messageInput = document.getElementById("commit-message");
         const message = messageInput?.value.trim();
 
         if (!message) {

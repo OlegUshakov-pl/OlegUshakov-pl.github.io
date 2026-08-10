@@ -8,10 +8,7 @@ const projects = (await getCollection('projects'))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const latestProjects = (await getCollection('projects'))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const latestProjects = projects.slice(0, 3);
 
 const latestPosts = (await getCollection('posts'))
   .filter(post => !post.data.draft)

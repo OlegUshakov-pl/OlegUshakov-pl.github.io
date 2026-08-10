@@ -4,10 +4,11 @@ import Sidebar from "../components/Sidebar.astro";
 import Recommended from "../components/Recommended.astro";
 import { getCollection } from "astro:content";
 
-const latestProjects = (await getCollection("projects"))
+const allProjects = (await getCollection("projects"))
     .filter((project) => !project.data.draft)
-    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-    .slice(0, 3);
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const latestProjects = allProjects.slice(0, 3);
 
 const latestPosts = (await getCollection("posts"))
     .filter((post) => !post.data.draft)
@@ -103,14 +104,12 @@ const latestPosts = (await getCollection("posts"))
             const params = new URLSearchParams(formData);
 
             try {
-                // Переносим данные из body прямо в URL и шлем как GET
-                const response = await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+                await fetch(`${SCRIPT_URL}?${params.toString()}`, {
                     method: "GET",
-                    mode: "no-cors", // Браузер пропустит запрос без CORS-проверок
+                    mode: "no-cors",
                 });
 
-                // Для no-cors это нормальное поведение успеха
-                status.textContent = "Message sent!";
+                status.textContent = "Request sent! Note: due to browser security, we cannot confirm delivery.";
                 form.reset();
             } catch (err) {
                 console.error("Submission error:", err);

@@ -4,25 +4,19 @@ import Sidebar from '../components/Sidebar.astro';
 import Recommended from '../components/Recommended.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects'))
+const allProjects = (await getCollection('projects'))
   .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 6);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const latestProjects = (await getCollection('projects'))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+const projects = allProjects.slice(0, 6);
+const latestProjects = allProjects.slice(0, 3);
 
-const latestPosts = (await getCollection('posts'))
+const allPosts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const posts = (await getCollection('posts'))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 6);
+const posts = allPosts.slice(0, 6);
+const latestPosts = allPosts.slice(0, 3);
 
 const base = import.meta.env.BASE_URL;
 ---
