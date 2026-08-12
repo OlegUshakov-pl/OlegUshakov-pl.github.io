@@ -9,6 +9,8 @@ draft: false
 ---
 # **Industrial Stair Calculator**
 
+[The stair calculator ISO 14122](https://github.com/OlegUshakov-pl/the-stair-calculator-ISO-14122)
+
 A Streamlit-based tool for calculating and verifying industrial stairs and stepladders per **ISO 14122-3:2016**.
 
 ## **Features**
@@ -24,4 +26,4 @@ A Streamlit-based tool for calculating and verifying industrial stairs and stepl
 - Side-view SVG visualization with dimensions (H, L, angle, B, Pdown, Pup)
 - Real-time feedback — compliant steps in blue, violations in red
 
-[The stair calculator ISO 14122](https://github.com/OlegUshakov-pl/the-stair-calculator-ISO-14122)
+Demo is [**here**](https://the-stair-calculator-iso-14122-3.streamlit.app/)
