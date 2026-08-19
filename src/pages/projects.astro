@@ -4,18 +4,25 @@ import Sidebar from '../components/Sidebar.astro';
 import Recommended from '../components/Recommended.astro';
 import { getCollection } from 'astro:content';
 
-const projects = (await getCollection('projects'))
+const allProjects = (await getCollection('projects'))
   .filter(project => !project.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-const latestProjects = projects.slice(0, 3);
+const base = import.meta.env.BASE_URL;
+const currentTag = Astro.url.searchParams.get('tag');
+
+const projects = currentTag
+  ? allProjects.filter(project => project.data.tags?.includes(currentTag))
+  : allProjects;
+
+const allTags = [...new Set(allProjects.flatMap(project => project.data.tags || []))].sort();
+
+const latestProjects = allProjects.slice(0, 3);
 
 const latestPosts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
-
-const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Projects - Oleg Ushakov">
@@ -36,6 +43,27 @@ const base = import.meta.env.BASE_URL;
             </p>
           </div>
 
+          {allTags.length > 0 && (
+            <div class="mb-6">
+              <div class="flex flex-wrap gap-2">
+                <a
+                  href={`${base}projects`}
+                  class={`inline-block px-3 py-1 text-sm rounded-full transition ${!currentTag ? 'bg-primary text-white' : 'bg-sidebar text-muted hover:bg-primary hover:text-white'}`}
+                >
+                  All
+                </a>
+                {allTags.map(tag => (
+                  <a
+                    href={`${base}tags/${tag}`}
+                    class={`inline-block px-3 py-1 text-sm rounded-full transition ${currentTag === tag ? 'bg-primary text-white' : 'bg-sidebar text-muted hover:bg-primary hover:text-white'}`}
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {projects.map((project) => (
               <article class="bg-white panel overflow-hidden group hover:shadow-md transition-shadow">
@@ -54,16 +82,27 @@ const base = import.meta.env.BASE_URL;
                     <a href={`${base}projects/${project.id}`}>{project.data.title}</a>
                   </h3>
                   <p class="text-gray-600 text-sm mb-4 line-clamp-2">{project.data.description}</p>
-                  <div class="flex items-center justify-between">
-                    <a href={`${base}projects/${project.id}`} class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
-                      View Project
-                      <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-                  </div>
+                  {project.data.tags && project.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5 mb-3">
+                      {project.data.tags.map(tag => (
+                        <a href={`${base}tags/${tag}`} class="inline-block bg-sidebar text-muted text-xs px-2 py-0.5 rounded-full hover:bg-primary hover:text-white transition">{tag}</a>
+                      ))}
+                    </div>
+                  )}
+                  <a href={`${base}projects/${project.id}`} class="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:text-primary-dark transition-colors">
+                    View Project
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </a>
                 </div>
               </article>
             ))}
           </div>
+
+          {projects.length === 0 && (
+            <div class="bg-white panel p-6 text-center">
+              <p class="text-gray-500">No projects found{currentTag ? ` for tag "${currentTag}"` : ''}.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

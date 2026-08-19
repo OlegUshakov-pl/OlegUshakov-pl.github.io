@@ -53,7 +53,7 @@ const latestPosts = allPosts.slice(0, 3);
             {post.data.tags && post.data.tags.length > 0 && (
               <div class="flex flex-wrap gap-2 mb-6">
                 {post.data.tags.map(tag => (
-                  <a href={`${base}blogs?tag=${tag}`} class="inline-block bg-sidebar px-3 py-1 text-sm text-muted hover:bg-primary hover:text-white transition">{tag}</a>
+                  <a href={`${base}tags/${tag}`} class="inline-block bg-sidebar px-3 py-1 text-sm text-muted hover:bg-primary hover:text-white transition">{tag}</a>
                 ))}
               </div>
             )}
