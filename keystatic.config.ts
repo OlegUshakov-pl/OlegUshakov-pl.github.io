@@ -7,11 +7,10 @@ export default config({
   collections: {
     tags: collection({
       label: 'Tags',
-      slugField: 'name',
       path: 'src/content/tags/*',
       format: { contentField: 'content' },
       schema: {
-        name: fields.slug({ name: { label: 'Name' } }),
+        name: fields.text({ label: 'Name' }),
         content: fields.markdoc({ label: 'Content', extension: 'md' }),
       },
     }),
