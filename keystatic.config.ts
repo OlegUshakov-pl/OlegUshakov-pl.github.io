@@ -5,6 +5,16 @@ export default config({
     kind: 'local',
   },
   collections: {
+    tags: collection({
+      label: 'Tags',
+      slugField: 'name',
+      path: 'src/content/tags/*',
+      format: { contentField: 'content' },
+      schema: {
+        name: fields.slug({ name: { label: 'Name' } }),
+        content: fields.markdoc({ label: 'Content', extension: 'md' }),
+      },
+    }),
     posts: collection({
       label: 'Blogs',
       slugField: 'title',
@@ -46,7 +56,7 @@ export default config({
         url: fields.text({ label: 'URL' }),
         description: fields.text({ label: 'Description' }),
         icon: fields.text({ label: 'Icon', description: 'Font Awesome class, e.g. fa-solid fa-calculator' }),
-        tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags', itemLabel: (props) => props.value }),
+        tags: fields.relationship({ label: 'Tags', collection: 'tags', many: true }),
         draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
         content: fields.markdoc({ label: 'Content', extension: 'md' }),
       },

@@ -4,8 +4,8 @@ description: 'Linear cutting calculator '
 pubDate: 2026-08-12
 heroImage: /images/project/image_lin.png
 tags:
-  - Project
-  - Job
+  - project
+  - job
 draft: false
 ---
 Hi. Today I made a l [Linear cutting calculator](https://github.com/OlegUshakov-pl/linear_cut_streamlit). I had a similar calculator in .xlsm and I thought it's too old and i have to make a new one. it's much better.

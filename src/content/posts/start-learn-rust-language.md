@@ -4,7 +4,7 @@ description: There are will be programms in the folder Rust
 pubDate: 2026-07-19
 heroImage: /images/project/rust.png
 tags:
-  - Language
+  - language
 draft: false
 ---
 ### **I started to learn Rust**

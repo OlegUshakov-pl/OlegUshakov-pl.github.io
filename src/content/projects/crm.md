@@ -6,7 +6,7 @@ description: >-
 pubDate: 2026-07-15
 heroImage: /images/project/CRM.png
 tags:
-  - Project
+  - project
 draft: false
 ---
 ## **CRM Project Description**

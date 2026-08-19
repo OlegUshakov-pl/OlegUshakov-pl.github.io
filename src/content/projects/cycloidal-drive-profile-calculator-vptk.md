@@ -7,7 +7,7 @@ description: >-
 pubDate: 2026-07-13
 heroImage: /images/project/screencalc.png
 tags:
-  - Project
+  - project
 draft: false
 ---
 A [Streamlit](https://streamlit.io/) application for calculating and visualizing the profile of a **cycloidal drive with intermediate rolling elements** (also known as VPTK — *Volnovoy Reduktor s Promezhutochnymi Telami Kacheniya*).

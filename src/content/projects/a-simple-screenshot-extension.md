@@ -4,7 +4,7 @@ description: A Chrome/Edge extension for taking screenshots with annotations
 pubDate: 2026-07-10
 heroImage: /images/project/screen.png
 tags:
-  - Project
+  - project
 draft: false
 ---
 ![](/images/project/menu.png)

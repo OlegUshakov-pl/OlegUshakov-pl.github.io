@@ -4,7 +4,7 @@ description: Edge Extension
 pubDate: 2026-07-11
 heroImage: /images/project/Lorem.png
 tags:
-  - Project
+  - project
 draft: false
 ---
 A lightweight browser extension that generates Lorem Ipsum placeholder text directly from your toolbar. No servers, no tracking — everything runs locally in your browser.

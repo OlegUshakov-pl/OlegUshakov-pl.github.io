@@ -4,7 +4,7 @@ description: the-stair-calculator-ISO-14122
 pubDate: 2026-07-12
 heroImage: /images/project/stair.png
 tags:
-  - Project
+  - project
 draft: false
 ---
 # **Industrial Stair Calculator**

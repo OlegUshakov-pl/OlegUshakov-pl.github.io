@@ -32,6 +32,10 @@ export async function getStaticPaths() {
 const { tag } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
+const allTagsEntries = await getCollection('tags');
+const tagNameMap = new Map(allTagsEntries.map(t => [t.id, t.data.name]));
+const tagName = tagNameMap.get(tag) || tag;
+
 const posts = (await getCollection('posts'))
   .filter(p => !p.data.draft && p.data.tags?.includes(tag))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
@@ -56,7 +60,7 @@ const latestPosts = (await getCollection('posts'))
 const hasResults = posts.length > 0 || projects.length > 0 || links.length > 0;
 ---
 
-<BaseLayout title={`#${tag} - Oleg Ushakov`}>
+<BaseLayout title={`#${tagName} - Oleg Ushakov`}>
   <section class="py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -69,10 +73,10 @@ const hasResults = posts.length > 0 || projects.length > 0 || links.length > 0;
         <div class="lg:col-span-2">
           <div class="bg-white panel p-6 mb-6">
             <h1 class="text-2xl sm:text-2xl text-gray-900 mb-2 font-semibold">
-              <i class="fa-solid fa-tag text-primary"></i> #{tag}
+              <i class="fa-solid fa-tag text-primary"></i> #{tagName}
             </h1>
             <p class="text-gray-700 leading-relaxed">
-              All content tagged with "{tag}".
+              All content tagged with "{tagName}".
             </p>
           </div>
 
@@ -109,7 +113,7 @@ const hasResults = posts.length > 0 || projects.length > 0 || links.length > 0;
                       {post.data.tags && post.data.tags.length > 0 && (
                         <div class="flex flex-wrap gap-1.5 mb-3">
                           {post.data.tags.map(t => (
-                            <a href={`${base}tags/${t}`} class="inline-block bg-sidebar text-muted text-xs px-2 py-0.5 rounded-full hover:bg-primary hover:text-white transition">{t}</a>
+                            <a href={`${base}tags/${t}`} class="inline-block bg-sidebar text-muted text-xs px-2 py-0.5 rounded-full hover:bg-primary hover:text-white transition">{tagNameMap.get(t) || t}</a>
                           ))}
                         </div>
                       )}
@@ -151,7 +155,7 @@ const hasResults = posts.length > 0 || projects.length > 0 || links.length > 0;
                       {project.data.tags && project.data.tags.length > 0 && (
                         <div class="flex flex-wrap gap-1.5 mb-3">
                           {project.data.tags.map(t => (
-                            <a href={`${base}tags/${t}`} class="inline-block bg-sidebar text-muted text-xs px-2 py-0.5 rounded-full hover:bg-primary hover:text-white transition">{t}</a>
+                            <a href={`${base}tags/${t}`} class="inline-block bg-sidebar text-muted text-xs px-2 py-0.5 rounded-full hover:bg-primary hover:text-white transition">{tagNameMap.get(t) || t}</a>
                           ))}
                         </div>
                       )}
