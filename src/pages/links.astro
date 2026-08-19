@@ -4,8 +4,17 @@ import Sidebar from '../components/Sidebar.astro';
 import Recommended from '../components/Recommended.astro';
 import { getCollection } from 'astro:content';
 
-const links = (await getCollection('links'))
+const allLinks = (await getCollection('links'))
   .filter(link => !link.data.draft);
+
+const base = import.meta.env.BASE_URL;
+const currentTag = Astro.url.searchParams.get('tag');
+
+const links = currentTag
+  ? allLinks.filter(link => link.data.tags?.includes(currentTag))
+  : allLinks;
+
+const allTags = [...new Set(allLinks.flatMap(link => link.data.tags || []))].sort();
 
 const latestProjects = (await getCollection('projects'))
   .filter(project => !project.data.draft)
@@ -16,8 +25,6 @@ const latestPosts = (await getCollection('posts'))
   .filter(post => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
-
-const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Links - Oleg Ushakov">
@@ -38,6 +45,27 @@ const base = import.meta.env.BASE_URL;
             </p>
           </div>
 
+          {allTags.length > 0 && (
+            <div class="mb-6">
+              <div class="flex flex-wrap gap-2">
+                <a
+                  href={`${base}links`}
+                  class={`inline-block px-3 py-1 text-sm rounded-full transition ${!currentTag ? 'bg-primary text-white' : 'bg-sidebar text-muted hover:bg-primary hover:text-white'}`}
+                >
+                  All
+                </a>
+                {allTags.map(tag => (
+                  <a
+                    href={`${base}links?tag=${tag}`}
+                    class={`inline-block px-3 py-1 text-sm rounded-full transition ${currentTag === tag ? 'bg-primary text-white' : 'bg-sidebar text-muted hover:bg-primary hover:text-white'}`}
+                  >
+                    {tag}
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {links.map((link) => (
               <a
@@ -54,10 +82,23 @@ const base = import.meta.env.BASE_URL;
                   {link.data.description && (
                     <p class="text-gray-500 text-sm mt-1 line-clamp-2">{link.data.description}</p>
                   )}
+                  {link.data.tags && link.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5 mt-2">
+                      {link.data.tags.map(tag => (
+                        <span class="inline-block bg-sidebar text-muted text-xs px-2 py-0.5 rounded-full">{tag}</span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </a>
             ))}
           </div>
+
+          {links.length === 0 && (
+            <div class="bg-white panel p-6 text-center">
+              <p class="text-gray-500">No links found{currentTag ? ` for tag "${currentTag}"` : ''}.</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
