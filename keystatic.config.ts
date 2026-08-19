@@ -36,5 +36,19 @@ export default config({
         content: fields.markdoc({ label: 'Content', extension: 'md' }),
       },
     }),
+    links: collection({
+      label: 'Links',
+      slugField: 'title',
+      path: 'src/content/links/*',
+      format: { contentField: 'content' },
+      schema: {
+        title: fields.slug({ name: { label: 'Name' } }),
+        url: fields.text({ label: 'URL' }),
+        description: fields.text({ label: 'Description' }),
+        icon: fields.text({ label: 'Icon', description: 'Font Awesome class, e.g. fa-brands fa-github' }),
+        draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
+        content: fields.markdoc({ label: 'Content', extension: 'md' }),
+      },
+    }),
   },
 });
