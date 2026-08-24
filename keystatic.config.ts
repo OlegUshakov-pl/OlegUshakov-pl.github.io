@@ -55,7 +55,7 @@ export default config({
         url: fields.text({ label: 'URL' }),
         description: fields.text({ label: 'Description' }),
         icon: fields.text({ label: 'Icon', description: 'Font Awesome class, e.g. fa-solid fa-calculator' }),
-        tags: fields.relationship({ label: 'Tags', collection: 'tags', many: true }),
+        tags: fields.array(fields.text({ label: 'Tag' }), { label: 'Tags', itemLabel: (props) => props.value }),
         draft: fields.checkbox({ label: 'Draft', defaultValue: false }),
         content: fields.markdoc({ label: 'Content', extension: 'md' }),
       },
