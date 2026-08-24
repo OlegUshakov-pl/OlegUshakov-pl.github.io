@@ -42,6 +42,18 @@
     "type": "Project"
   },
   {
+    "title": "NEMA Stepper Motors Reference",
+    "description": "NiceGUI reference app for NEMA stepper motor frame sizes (NEMA 8 – NEMA 42).",
+    "url": "/projects/nema-stepper-motors-reference",
+    "type": "Project"
+  },
+  {
+    "title": "Shaft & Key Calculator (ISO 6885)",
+    "description": "The calculator solves two classic mechanical engineering tasks",
+    "url": "/projects/shaft-and-key-calculator-iso-6885",
+    "type": "Project"
+  },
+  {
     "title": "Simple Lorem Ipsum Generator — Edge Extension",
     "description": "Edge Extension",
     "url": "/projects/simple-lorem-ipsum-generator-edge-extension",
