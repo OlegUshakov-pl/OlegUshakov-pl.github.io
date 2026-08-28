@@ -5,7 +5,6 @@ description: The stair calculator ISO 14122-2
 icon: fa-solid fa-calculator
 tags:
   - calculator
-  - engineering
 draft: false
 ---
 The stair calculator ISO 14122-2
