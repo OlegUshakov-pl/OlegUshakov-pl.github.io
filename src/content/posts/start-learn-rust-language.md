@@ -21,6 +21,8 @@ Rust supports multiple programming paradigms.It was influenced by ideas from fun
 
 Rust enforces memory safety(i.e., that all references point to valid memory) without a conventional garbage collector; instead, memory safety errors and data races are prevented by the "borrow checker", which tracks the object lifetime of references at compile time.
 
+I burnt. I don't want Rust more.
+
 #### [Rust](https://github.com/OlegUshakov-pl/first_rust)
 
 ##### 

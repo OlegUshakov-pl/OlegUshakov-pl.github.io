@@ -12,12 +12,6 @@
     "type": "Blog"
   },
   {
-    "title": "Started to learn V language",
-    "description": "Started to learn V language",
-    "url": "/blogs/started-to-learn-v-language",
-    "type": "Blog"
-  },
-  {
     "title": "A simple-screenshot-extension",
     "description": "A Chrome/Edge extension for taking screenshots with annotations",
     "url": "/projects/a-simple-screenshot-extension",
