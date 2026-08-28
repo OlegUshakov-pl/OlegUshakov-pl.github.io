@@ -2,6 +2,7 @@
 title: Start learn Rust language
 description: There are will be programms in the folder Rust
 pubDate: 2026-07-19
+updatedDate: 2026-08-28
 heroImage: /images/project/rust.png
 tags:
   - languages
