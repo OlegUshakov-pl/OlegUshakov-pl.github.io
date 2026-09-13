@@ -10,9 +10,9 @@
     "generate-search": "node scripts/generate-search-index.mjs"
   },
   "dependencies": {
-    "@astrojs/markdoc": "^2.0.6",
-    "@astrojs/react": "^6.0.2",
-    "astro": "^7.2.0",
+    "@astrojs/markdoc": "^2.0.9",
+    "@astrojs/react": "^6.0.5",
+    "astro": "^7.3.2",
     "yaml": "^2.9.0"
   },
   "devDependencies": {
