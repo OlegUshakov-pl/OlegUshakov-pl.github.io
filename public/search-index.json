@@ -24,6 +24,12 @@
     "type": "Blog"
   },
   {
+    "title": "6-Axis Robot Torque Calculator",
+    "description": "6-axis-robot-torque-calculator",
+    "url": "/projects/6-axis-robot-torque-calculator",
+    "type": "Project"
+  },
+  {
     "title": "A simple-screenshot-extension",
     "description": "A Chrome/Edge extension for taking screenshots with annotations",
     "url": "/projects/a-simple-screenshot-extension",
@@ -42,6 +48,12 @@
     "type": "Project"
   },
   {
+    "title": "KestrelCAD",
+    "description": "Kestrel CAD improving",
+    "url": "/projects/kestrel-cad",
+    "type": "Project"
+  },
+  {
     "title": "Linear cutting calculator",
     "description": "Linear cutting calculator ",
     "url": "/projects/linear-cutting-calculator",
@@ -51,6 +63,12 @@
     "title": "NEMA Stepper Motors Reference",
     "description": "NiceGUI reference app for NEMA stepper motor frame sizes (NEMA 8 – NEMA 42).",
     "url": "/projects/nema-stepper-motors-reference",
+    "type": "Project"
+  },
+  {
+    "title": "Scada",
+    "description": "Scada instead of old PyScada",
+    "url": "/projects/scada",
     "type": "Project"
   },
   {
