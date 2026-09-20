@@ -84,6 +84,12 @@
     "type": "Project"
   },
   {
+    "title": "Task Orchestrator via Local LLM (Ollama / LM Studio)",
+    "description": "Splits a task into subtasks and executes them step-by-step via a local LLM through Ollama or LM Studio.",
+    "url": "/projects/task-orchestrator-via-local-llm-ollama-lm-studio",
+    "type": "Project"
+  },
+  {
     "title": "The stair calculator ISO 14122",
     "description": "the-stair-calculator-ISO-14122",
     "url": "/projects/the-stair-calculator-iso-14122",
