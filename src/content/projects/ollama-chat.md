@@ -1,7 +1,7 @@
 ---
 title: Ollama-chat
 description: Ollama Chat is a conversational AI
-pubDate: 2026-09-20
+pubDate: 2026-10-04
 heroImage: /images/project/chat.png
 tags:
   - Ollama
