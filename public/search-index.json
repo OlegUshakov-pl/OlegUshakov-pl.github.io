@@ -66,6 +66,12 @@
     "type": "Project"
   },
   {
+    "title": "Ollama-chat",
+    "description": "Ollama Chat is a conversational AI",
+    "url": "/projects/ollama-chat",
+    "type": "Project"
+  },
+  {
     "title": "Scada",
     "description": "Scada instead of old PyScada",
     "url": "/projects/scada",
