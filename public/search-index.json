@@ -36,6 +36,18 @@
     "type": "Project"
   },
   {
+    "title": "Article-Generator",
+    "description": "Article Generator Ollama",
+    "url": "/projects/article-generator",
+    "type": "Project"
+  },
+  {
+    "title": "Claude Code Design",
+    "description": "Ollama Fork of wieslawsoltes/ClaudeCodeDesign",
+    "url": "/projects/claude-code-design",
+    "type": "Project"
+  },
+  {
     "title": "CRM",
     "description": "This CRM is built for small and medium-sized businesses that need a reliable, organized way to manage project documentation and reference materials. ",
     "url": "/projects/crm",
