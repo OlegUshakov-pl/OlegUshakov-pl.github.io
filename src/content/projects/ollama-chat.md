@@ -1,12 +1,14 @@
 ---
 title: Ollama-chat
 description: Ollama Chat is a conversational AI
-pubDate: 2026-10-12
+pubDate: 2026-11-02
 heroImage: /images/project/chat.png
 tags:
   - Ollama
 draft: false
 ---
+**Ollama Chat** is a conversational AI chat client that uses [Ollama](https://ollama.com/) to interact with local large language models (LLMs) entirely offline. Private, fast, no cloud.
+
 ## **What's new in this fork**
 
 - **Completely redesigned theme** — light / dark (`prefers-color-scheme` + `data-theme`), new sidebar / composer / messages layout, mobile-responsive. See `src/ollama_chat/static/app.css` and `src/ollama_chat/static/app.js`.
@@ -16,51 +18,28 @@ draft: false
 - **Markdown viewer (.md preview in chat)** — button next to theme toggle in sidebar toolbar. Opens system file picker (`accept=".md,.markdown"`), reads file with `FileReader` and renders it **inside the chat area** via `marked` + `DOMPurify` (`src/ollama_chat/static/app.js:505`, `src/ollama_chat/static/app.css:987`). Header shows filename + `Close preview` button, `Esc` also closes. No upload to server, works offline.
 - **Reliable rename** — `Rename` in chat menu now updates both sidebar and open header instantly and awaits `POST /setConversationTitle` before navigation (`src/ollama_chat/static/app.js:885`, `src/ollama_chat/static/ollamaChatConversation.bare:312`).
 - **One-click Windows launch — `start.bat` / `install.bat`** — `install.bat` clones to clean folder + creates `.venv`, `start.bat` creates `.venv` if missing and forwards all args to `ollama-chat` (e.g. `start.bat -p 8080`).
-
-**Ollama Chat** is a conversational AI chat client that uses [Ollama](https://ollama.com/) to interact with local large language models (LLMs) entirely offline. Ideal for AI enthusiasts, developers, or anyone wanting private, offline LLM chats.
-
-> **Fork:** [OlegUshakov-pl/ollama-chat](https://github.com/OlegUshakov-pl/ollama-chat) — fork of [craigahobbs/ollama-chat](https://github.com/craigahobbs/ollama-chat) with a redesigned theme, thinking-mode toggle, and file attachments.
+- **Workspace & long-term memory** — a directory on disk (`~/ollama-chat-workspace` by default) holding `USER.md` (about the user) and `MEMORY.md` (durable notes). The memory is injected into the system prompt for every model turn (`src/ollama_chat/memory.py`), managed from the chat with `/memory`, `/remember`, `/forget`. Set on the **Settings** page (`#/settings`) or via the `OLLAMA_CHAT_WORKSPACE` env var.
+- **Settings and Tasks pages** — the home page is chat-only now: workspace and Gmail (IMAP/SMTP) settings moved to **Settings** (`#/settings`), the task manager moved to **Tasks** (`#/tasks`). The sidebar shows the workspace name and `Settings` / `Tasks` links. The server binds to `127.0.0.1` only.
+- **Gmail / email settings in the app** — IMAP/SMTP host+port, login and an app password are edited on the Settings page and written to `<workspace>/.env` (same format as `.env.example`). The password is write-only: it is never stored in `ollama-chat.json`, never committed to git and never sent back to the browser (only a `hasPassword` flag is returned). **Test connection** logs in to both servers without sending anything.
+- **Profile page (`#/profile`)** — a form (name, profession, country, city, time zone, languages, interests, equipment, reply style, …) that fills `memory/USER.md`; the form can be switched to a raw **Text** mode to edit `USER.md` as markdown. `USER.md` is added to the system prompt of every message (character limit: config key `profileLimit`, default `1500`), and the current date and time (time zone from `USER.md`'s `Timezone` line, or local) are injected with it. API: `GET /getProfile`, `POST /setProfile`.
 
 ## **Quick start**
 
 Requirements: [Ollama](https://ollama.com/download) running + Python 3.11+ and Git on `PATH`.
 
-### **Option A — via `install.bat` (clean folder, recommended for Windows)**
+### **Option A — via `install.bat` (Windows, recommended)**
 
-The easiest way for new users — just copy `install.bat` into an empty folder and run it:
+1. Create empty folder, copy `install.bat` into it (or [download](https://github.com/OlegUshakov-pl/ollama-chat/raw/main/install.bat)).
 
-1. Create an empty folder and copy `install.bat` from this repository into it (or [download it](https://github.com/OlegUshakov-pl/ollama-chat/raw/main/install.bat)).
+1. Double-click `install.bat`.
 
-1. Double-click `install.bat` (or run `install.bat` from a console).
+   Clones to `.\ollama-chat`, creates `.venv`, `pip install -e .`.
 
-   `install.bat:1` will clone `https://github.com/OlegUshakov-pl/ollama-chat.git` into `.\ollama-chat` (if not already present), create `.venv`, upgrade `pip`, and run `pip install -e .` (includes `python-docx` for `.docx` support).
-
-1. Go to the cloned folder and start the server:
-
-   ```
+1. ```
    cd ollama-chat
    start.bat
    ```
 
-   The app opens at [http://127.0.0.1:8080/](http://127.0.0.1:8080/) , config file is `ollama-chat.json` in the user's home directory.
-
-### **Option B — via `start.bat` (if you already cloned)**
-
-```
-git clone https://github.com/OlegUshakov-pl/ollama-chat.git
-cd ollama-chat
-start.bat
-```
-
-What `start.bat` does (`start.bat:1`):
-
-1. Creates `.venv` in the project root if missing (`python -m venv .venv`).
-1. Activates the environment and removes stale `~*` directories from `site-packages`.
-1. Installs dependencies and the package (`pip install -e .`) if `.venv\Scripts\ollama-chat.exe` is not yet present (skips on re-run, works offline).
-1. Runs `ollama-chat %*` — all arguments are forwarded (e.g. `start.bat -p 8080 -h 127.0.0.1`).
-
-You can also double-click `start.bat` in File Explorer.
-
-> If `OLLAMA_HOST` is not `http://127.0.0.1:11434`, set the environment variable before launching — see `src/ollama_chat/ollama.py:19`.
+   Opens [http://127.0.0.1:8080/](http://127.0.0.1:8080/) , config is `ollama-chat.json` in home directory.
 
 ### [**Ollama-chat**](https://github.com/OlegUshakov-pl/ollama-chat)
